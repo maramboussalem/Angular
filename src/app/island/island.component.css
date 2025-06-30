@@ -1,0 +1,67 @@
+.island-wrapper {
+  padding: 30px;
+  font-family: 'Poppins', sans-serif;
+  background: #f4f8fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.island-map {
+  position: relative;
+  width: 1300px;
+  height: 900px;
+background-image: url('/assets/images/island.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+/* Quiz points */
+.quiz {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  background-color: #42a5f5;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+/* Étudiants avatars */
+.student {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+.student img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Routes */
+.routes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.routes line {
+  stroke: #8d6e63;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
