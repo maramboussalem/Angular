@@ -1,0 +1,74 @@
+<div class="accueil">
+  <div class="welcome-title">My Classes</div>
+  <div class="subtitle">Overview of the classes you are teaching</div>
+
+  <!-- Liste des classes -->
+  <div class="top-classes">
+    <div class="class-list">
+      <div class="class-card">
+        <h4>Class 3A</h4>
+        <p>Students: 28</p>
+        <p>Quizzes: 12</p>
+        <button class="btn" (click)="toggleDetails('3A')">View Details</button>
+      </div>
+      <div class="class-card">
+        <h4>Class 4B</h4>
+        <p>Students: 31</p>
+        <p>Quizzes: 15</p>
+        <button class="btn" (click)="toggleDetails('4B')">View Details</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Détails dynamiques classe 3A -->
+  <div *ngIf="selectedClass === '3A'" class="details-box">
+    <h3>Details for Class 3A</h3>
+    <ul>
+      <li><strong>Schedule:</strong> Monday & Thursday, 10:00 - 12:00</li>
+      <li><strong>Room:</strong> B203</li>
+      <li><strong>Last Quiz:</strong> Algorithms Basics</li>
+    </ul>
+
+    <h4 style="margin-top: 15px;">Students</h4>
+    <ul class="student-list">
+      <li>
+        <img src="https://randomuser.me/api/portraits/men/11.jpg" class="avatar" />
+        Ahmed Trabelsi – Intermediate
+      </li>
+      <li>
+        <img src="https://randomuser.me/api/portraits/women/21.jpg" class="avatar" />
+        Nour Ben Ali – Beginner
+      </li>
+      <li>
+        <img src="https://randomuser.me/api/portraits/men/31.jpg" class="avatar" />
+        Sami Gharbi – Advanced
+      </li>
+    </ul>
+  </div>
+
+  <!-- Détails dynamiques classe 4B -->
+  <div *ngIf="selectedClass === '4B'" class="details-box">
+    <h3>Details for Class 4B</h3>
+    <ul>
+      <li><strong>Schedule:</strong> Tuesday & Friday, 14:00 - 16:00</li>
+      <li><strong>Room:</strong> A101</li>
+      <li><strong>Last Quiz:</strong> JavaScript Fundamentals</li>
+    </ul>
+
+    <h4 style="margin-top: 15px;">Students</h4>
+    <ul class="student-list">
+      <li>
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" class="avatar" />
+        Lina Jaziri – Advanced
+      </li>
+      <li>
+        <img src="https://randomuser.me/api/portraits/men/51.jpg" class="avatar" />
+        Youssef Mejri – Intermediate
+      </li>
+      <li>
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="avatar" />
+        Rania Gharsalli – Beginner
+      </li>
+    </ul>
+  </div>
+</div>
