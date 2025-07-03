@@ -1,0 +1,22 @@
+<div class="accueil">
+  <div class="welcome-title">My Calendar</div>
+  <div class="subtitle">Upcoming classes, quizzes, and events</div>
+
+  <div class="calendar">
+    <!-- Entête des jours -->
+    <div class="calendar-header">
+      <div *ngFor="let day of days" class="calendar-day-name">{{ day }}</div>
+    </div>
+
+    <!-- Grille de dates -->
+    <div class="calendar-grid">
+      <div *ngFor="let date of calendarDates" class="calendar-day" [class.has-event]="date.event">
+        <span class="date-number">{{ date.day }}</span>
+        <div *ngIf="date.event" class="event">
+          <strong>{{ date.event.title }}</strong><br />
+          {{ date.event.time }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="message" [ngClass]="type">
+  <span class="icon">
+    <ng-container [ngSwitch]="type">
+      <i *ngSwitchCase="'success'" class="fas fa-check-circle"></i>
+      <i *ngSwitchCase="'error'" class="fas fa-exclamation-circle"></i>
+      <i *ngSwitchCase="'info'" class="fas fa-info-circle"></i>
+      <i *ngSwitchDefault class="fas fa-comment"></i>
+    </ng-container>
+  </span>
+  <div class="content">
+    <strong>{{ title }}</strong>
+    <p>{{ text }}</p>
+  </div>
+  <button class="close-btn" (click)="close()">×</button>
+</div>
