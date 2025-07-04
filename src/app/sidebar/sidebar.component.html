@@ -1,7 +1,6 @@
-<!-- Si on n'est pas sur login, on affiche sidebar + contenu -->
-<div class="container" *ngIf="showSidebar">
+<div class="container">
+  <!-- Barre latérale permanente -->
   <aside class="sidebar">
-    <!-- Ton menu sidebar ici -->
     <h2>QUIZ MASTER</h2>
     <nav>
       <a routerLink="/accueil"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
@@ -16,12 +15,8 @@
     </nav>
   </aside>
 
+  <!-- Contenu qui change selon la route -->
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>
-</div>
-
-<!-- Si on est sur login, on affiche juste la page login (sans sidebar) -->
-<div *ngIf="!showSidebar">
-  <router-outlet></router-outlet>
 </div>

@@ -13,6 +13,7 @@ import { ClassesComponent } from './classes/classes.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MessageComponent } from './message/message.component';
 import { IslandComponent } from './island/island.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { IslandComponent } from './island/island.component';
     ClassesComponent,
     CalendarComponent,
     MessageComponent,
-    IslandComponent
+    IslandComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

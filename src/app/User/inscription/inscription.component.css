@@ -1,142 +1,351 @@
-* {
-  box-sizing: border-box;
+/* Styles généraux */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #ffeaea, #ffccbc);
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  background: linear-gradient(to right, #ffeaea, #8b0000);
-  min-height: 100vh;
+  color: #333;
 }
 
 header {
-  background-color: white;
-  padding: 1.5rem 2rem 1rem 2rem;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 30px 15px;
 }
 
 header h1 {
-  color: #b30000;
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  font-size: 32px;
+  color: #ef3633;
+  margin: 0;
 }
 
-nav {
-  display: flex;
-  justify-content: center;
-  background-color: white;
-  padding: 0.5rem 0;
-  gap: 2rem;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-
-nav a {
-  text-decoration: none;
-  color: #8b0000;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #d32f2f;
-}
-
+/* Container principal */
 .container {
-  display: flex;
-  justify-content: center;
-  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.section {
-  background-color: #f8dede;
-  padding: 2rem;
-  border-radius: 25px;
-  width: 100%;
-  max-width: 700px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
+/* Titres de section */
 .section h2 {
+  color: #ef3633;
+  font-size: 26px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* USER PROFILE LAYOUT */
+.user-profile {
+  display: flex;
+  gap: 40px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* EDIT PROFILE CARD */
+.edit-profile-card {
+  flex: 2;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-profile-header {
+  background: linear-gradient(60deg, #ef5350, #e53935);
+  color: #fff;
+  padding: 24px 30px;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.05em;
+}
+
+.edit-profile-header span {
+  font-weight: 400;
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+/* Formulaire */
+.profile-form {
+  padding: 25px 30px 30px;
+}
+
+.form-row {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  flex: 1 1 100%;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: border-color 0.3s;
+  resize: vertical;
+  min-height: 48px;
+}
+
+.form-group textarea {
+  min-height: 80px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #ef5350;
+  outline: none;
+  box-shadow: 0 0 8px rgba(239, 83, 80, 0.4);
+}
+
+/* Bouton de mise à jour */
+.update-btn {
+  background: linear-gradient(135deg, #ef5350, #e53935);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s, box-shadow 0.3s;
+  user-select: none;
+}
+
+.update-btn:hover {
+  background: linear-gradient(135deg, #e53935, #b71c1c);
+  box-shadow: 0 6px 16px rgba(229, 57, 53, 0.6);
+}
+
+/* PROFILE CARD */
+.profile-card {
+  flex: 1;
+  background: #fff;
+  padding: 35px 25px;
+  border-radius: 15px;
   text-align: center;
-  font-size: 1.6rem;
-  color: #8b0000;
-  margin-bottom: 2rem;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-card img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ef5350;
+  box-shadow: 0 4px 12px rgba(239, 83, 80, 0.4);
+}
+
+.profile-card h4 {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.profile-card h3 {
+  font-size: 22px;
+  margin: 8px 0 0;
+  color: #333;
   font-weight: 700;
 }
 
-form label {
-  display: block;
-  margin-bottom: 0.4rem;
-  font-weight: 600;
-  color: #400000;
+.profile-card p {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.4;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="file"] {
-  width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+/* Bouton Follow */
+.follow-btn {
+  background: linear-gradient(135deg, #ef5350, #e53935);
+  color: #fff;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  transition: background 0.3s, box-shadow 0.3s;
+  user-select: none;
+  align-self: center;
+  box-shadow: 0 4px 14px rgba(239, 83, 80, 0.5);
 }
 
-form input[type="radio"] {
-  margin-right: 0.5rem;
+.follow-btn:hover {
+  background: linear-gradient(135deg, #e53935, #b71c1c);
+  box-shadow: 0 6px 20px rgba(229, 57, 53, 0.7);
 }
 
-.avatar-selection {
+/* CREATE ACCOUNT FORM */
+.create-account {
+  background: #fff;
+  padding: 30px 35px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.create-account label {
+  font-weight: 600;
+  color: #444;
+  font-size: 15px;
+}
+
+.create-account input[type="text"],
+.create-account input[type="email"],
+.create-account input[type="file"] {
+  padding: 12px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.create-account input[type="text"]:focus,
+.create-account input[type="email"]:focus,
+.create-account input[type="file"]:focus {
+  border-color: #ef5350;
+  outline: none;
+  box-shadow: 0 0 8px rgba(239, 83, 80, 0.4);
+}
+
+/* Groupes radio genre */
+.gender-group {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
   margin-bottom: 1.5rem;
 }
 
-.avatar-selection img {
-  width: 64px;
-  height: 64px;
+.gender-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   cursor: pointer;
-  border-radius: 10px;
-  transition: transform 0.2s ease;
-}
-
-.avatar-selection img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-
-button[type="submit"] {
-  display: block;
-  width: 100%;
-  padding: 0.8rem;
-  background: linear-gradient(to right, #b30000, #800000);
-  color: white;
   font-weight: 600;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
+  user-select: none;
+}
+
+.gender-group input[type="radio"] {
   cursor: pointer;
-  transition: background 0.3s ease;
+  width: 18px;
+  height: 18px;
 }
 
-button[type="submit"]:hover {
-  background: linear-gradient(to right, #a30000, #5c0000);
+/* Sélection avatar */
+.create-account .avatar-selection {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-@media (max-width: 600px) {
-  nav {
+.create-account .avatar-selection img {
+  width: 85px;
+  height: 85px;
+  cursor: pointer;
+  border-radius: 15px;
+  border: 3px solid transparent;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  object-fit: cover;
+}
+
+.create-account .avatar-selection img:hover,
+.create-account .avatar-selection img.selected {
+  transform: scale(1.1);
+  border-color: #ef5350;
+}
+
+/* Bouton créer compte */
+.create-account button {
+  background: linear-gradient(135deg, #ef5350, #e53935);
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  align-self: flex-start;
+  box-shadow: 0 6px 18px rgba(239, 83, 80, 0.6);
+}
+
+.create-account button:hover {
+  background: linear-gradient(135deg, #e53935, #b71c1c);
+  box-shadow: 0 8px 24px rgba(229, 57, 53, 0.7);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .user-profile {
     flex-direction: column;
-    gap: 0.5rem;
+    padding: 20px 15px;
   }
 
-  .avatar-selection {
+  .edit-profile-card {
+    width: 100%;
+  }
+
+  .profile-card {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .create-account {
+    padding: 25px 20px;
+  }
+
+  .gender-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .create-account .avatar-selection {
     justify-content: center;
   }
 }
