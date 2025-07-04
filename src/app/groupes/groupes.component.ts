@@ -8,15 +8,15 @@ import { Component } from '@angular/core';
 export class GroupesComponent {
   groups = [
     {
-      name: 'Group 1 🌟',
-      students: ['Student A', 'Student B', 'Student C'],
+      name: 'Group 1',
+      students: ['Student A', 'Student B', 'Student C','Student D', 'Student E', 'Student F'],
     },
     {
-      name: 'Group 2 🚀',
-      students: ['Student D', 'Student E', 'Student F'],
+      name: 'Group 2 ',
+      students: ['Student A', 'Student B', 'Student C','Student D', 'Student E', 'Student F'],
     },
     {
-      name: 'Group 3 🌴',
+      name: 'Group 3',
       students: ['Student G', 'Student H'],
     },
   ];
