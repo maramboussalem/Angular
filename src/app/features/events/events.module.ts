@@ -3,27 +3,26 @@ import { CommonModule } from '@angular/common';
 
 import { EventsRoutingModule } from './events-routing.module';
 import { EventsComponent } from './events.component';
-import { EventDetailComponent } from './pages/event-detail/event-detail.component';
-import { EventCardComponent } from './components/event-card/event-card.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import {ListEventComponent} from './pages/list-event/list-event.component';
-import {FormsModule} from '@angular/forms';
-import {SharedModule} from '../../shared/shared.module';
-
+import { ListEventComponent } from './list-event/list-event.component';
+import { FormsModule } from '@angular/forms';
+import { DetailEventComponent } from './detail-event/detail-event.component';
+import { SideBarComponent } from './side-bar/side-bar.component'; 
 
 @NgModule({
   declarations: [
     EventsComponent,
-    EventDetailComponent,
-    EventCardComponent,
-    NavBarComponent,
-    ListEventComponent
+    ListEventComponent,
+    DetailEventComponent,
+    SideBarComponent
   ],
   imports: [
     CommonModule,
     EventsRoutingModule,
-    FormsModule,
-    SharedModule,
+    FormsModule 
+  ],
+  exports: [
+    ListEventComponent
   ]
+
 })
 export class EventsModule { }

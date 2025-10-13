@@ -1,0 +1,93 @@
+/* =========================
+   EVENT DETAIL MODERNE
+========================= */
+.event-detail {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.event-detail h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #003f2d;
+  text-align: center;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #c4ff4d, #046d49);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.event-detail img {
+  border-radius: 15px;
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.event-info p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #444;
+}
+
+.event-info strong {
+  color: #003f2d;
+}
+
+.btns {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-detail {
+  padding: 12px 25px;
+  font-weight: bold;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-like {
+  background: #c4ff4d;
+  color: #003f2d;
+}
+
+.btn-buy {
+  background: #046d49;
+  color: white;
+}
+
+.btn-detail:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Message erreur */
+.alert-warning {
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fdf2d2;
+  color: #8a6d3b;
+  border: 1px solid #faebcc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .event-detail {
+    padding: 20px;
+  }
+}

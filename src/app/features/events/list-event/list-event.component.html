@@ -1,0 +1,43 @@
+<div class="events-section">
+  <h2 class="section-title">🎉 Événements à ne pas manquer</h2>
+
+  <div class="search-box">
+    <input type="text" placeholder="🔍 Rechercher un événement..." [(ngModel)]="searchValue">
+  </div>
+
+  <div class="events-grid">
+    <div class="event-card" *ngFor="let e of filteredEvents">
+      <div class="event-img">
+        <img [src]="e.imageUrl" [alt]="e.title">
+        <span *ngIf="isExpired(e) || e.nbPlaces <= 0" class="badge-status">
+          {{ isExpired(e) ? 'Expiré ❌' : 'Complet 🚫' }}
+        </span>
+      </div>
+
+      <div class="event-body">
+        <h3>{{ e.title }}</h3>
+        <p class="event-meta">📍{{ e.location }} • 📅 {{ e.date | date:'mediumDate' }}</p>
+        <p class="event-desc">{{ e.description }}</p>
+        <p class="event-price">💰 {{ e.price | currency:'TND':'symbol-narrow' }}</p>
+        <p class="event-places">🎟️ {{ e.nbPlaces }} places disponibles</p>
+
+        <div class="event-footer">
+          <button class="btn-like" (click)="like(e)" [disabled]="isExpired(e) || e.nbPlaces <= 0">
+            👍 Like
+          </button>
+
+          <button class="btn-buy" [hidden]="e.nbPlaces == 0" (click)="buyTicket(e)">
+            🎟️ Buy Ticket
+          </button>
+
+          <span class="likes-count"> {{ e.nbrLike }}</span>
+          
+          <a [routerLink]="['./details', e.id]" class="btn-details">
+            Details
+          </a>  
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

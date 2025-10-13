@@ -1,0 +1,19 @@
+<div class="event-detail" *ngIf="event; else notFound">
+  <h2>{{ event.title }}</h2>
+  <img [src]="event.imageUrl" [alt]="event.title">
+
+  <div class="event-info">
+    <p><strong>Date :</strong> {{ event.date | date:'fullDate' }}</p>
+    <p><strong>Lieu :</strong> {{ event.location }}</p>
+    <p><strong>Description :</strong> {{ event.description }}</p>
+    <p><strong>Prix :</strong> {{ event.price | currency:'TND':'symbol-narrow' }}</p>
+    <p><strong>Places restantes :</strong> {{ event.nbPlaces }}</p>
+    <p><strong>Likes :</strong> {{ event.nbrLike }}</p>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="alert alert-warning">
+    ⚠️ Événement introuvable.
+  </div>
+</ng-template>
