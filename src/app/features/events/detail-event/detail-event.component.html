@@ -1,58 +1,60 @@
-<div class="event-wrapper" *ngIf="currentEvent; else noEvent">
-  <!-- HERO SECTION -->
-  <div
-    class="event-hero"
-    [style.backgroundImage]="'url(' + (currentEvent.imageUrl || 'assets/default-event.jpg') + ')'"
-  >
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1 class="title">{{ currentEvent.title }}</h1>
-      <p class="subtitle">
-        <i class="fa-solid fa-calendar-days"></i>
-        {{ currentEvent.date | date: 'longDate' }}
-        •
-        <i class="fa-solid fa-location-dot"></i>
-        {{ currentEvent.location }}
-      </p>
+<div class="event-detail-container" *ngIf="currentEvent; else notFound">
+  <div class="event-card shadow-sm p-3 rounded">
+
+    <div class="event-image mb-3 text-center">
+      <img
+        [src]="currentEvent.imageUrl || 'assets/default-event.jpg'"
+        [alt]="currentEvent.title"
+        class="img-fluid rounded"
+        style="max-height: 400px; object-fit: cover;"
+      />
     </div>
-  </div>
 
-  <!-- DETAILS SECTION -->
-  <div class="event-details">
-    <div class="card glass-card">
-      <h2>À propos de l'événement</h2>
-      <p>{{ currentEvent.description }}</p>
+    <div class="event-info">
+      <h2 class="event-title mb-2">{{ currentEvent.title }}</h2>
+      <p class="event-description mb-3">{{ currentEvent.description }}</p>
 
-      <div class="info">
-        <div>
-          <i class="fa-solid fa-ticket"></i>
-          <span>Prix : {{ currentEvent.price | currency:'EUR' }}</span>
-        </div>
-        <div>
-          <i class="fa-solid fa-chair"></i>
-          <span>Places disponibles : {{ currentEvent.nbPlaces }}</span>
-        </div>
-        <div>
-          <i class="fa-solid fa-user-tie"></i>
-          <span>Organisateur ID : {{ currentEvent.organizerId }}</span>
-        </div>
-        <div>
-          <i class="fa-solid fa-heart"></i>
-          <span>{{ currentEvent.nbrLike }} Likes</span>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button class="btn join">Participer</button>
-        <button class="btn share"><i class="fa-solid fa-share-nodes"></i> Partager</button>
+      <div class="event-meta d-flex flex-column gap-2">
+        <p><i class="bi bi-calendar-event me-2"></i> {{ currentEvent.date | date:'fullDate' }}</p>
+        <p><i class="bi bi-geo-alt me-2"></i> {{ currentEvent.location }}</p>
+        <p><i class="bi bi-cash-coin me-2"></i> {{ currentEvent.price }} DT</p>
+        <p>
+          <i class="bi bi-people me-2"></i>
+          <strong>Places :</strong>
+          <span
+            class="badge"
+            [ngClass]="{
+              'bg-success': currentEvent.nbPlaces > 0,
+              'bg-danger': currentEvent.nbPlaces === 0
+            }"
+          >
+            {{ currentEvent.nbPlaces > 0 ? currentEvent.nbPlaces + ' disponibles' : 'Complet' }}
+          </span>
+        </p>
+        <p>
+          <i class="bi bi-heart-fill text-danger me-2"></i>
+          {{ currentEvent.nbrLike }} J’aime
+        </p>
       </div>
     </div>
+
+    <!-- 🔹 Boutons d’action -->
+    <div class="event-actions mt-3 d-flex gap-2">
+      <button class="btn btn-primary" [disabled]="currentEvent.nbPlaces === 0">
+        Réserver
+      </button>
+      <button class="btn btn-outline-secondary">
+        Partager
+      </button>
+    </div>
+    
   </div>
 </div>
 
-<!-- TEMPLATE SI AUCUN EVENEMENT -->
-<ng-template #noEvent>
-  <div class="no-event">
-    <p>Aucun événement trouvé 😔</p>
+<!-- 🔹 Message si aucun événement trouvé -->
+<ng-template #notFound>
+  <div class="not-found text-center p-5">
+    <h3>🚫 Événement introuvable</h3>
+    <p>Vérifie l’identifiant ou retourne à la liste des événements.</p>
   </div>
 </ng-template>

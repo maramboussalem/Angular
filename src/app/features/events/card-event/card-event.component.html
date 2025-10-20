@@ -1,32 +1,51 @@
+<div *ngIf="e.title===searchValue || searchValue==null">
+  
+  <div class="card h-100 shadow-sm" NgHover>
 
-  <!---Enhance search input and display data--->
-  <div  *ngIf="e.title===searchValue || searchValue==null">
-    <div class="card h-100 shadow-sm">
-      <img src="{{e.imageUrl}}"
-           class="card-img-top img-fluid"
-           style="height: 200px; object-fit: cover;">
+    <!-- Image -->
+    <img src="{{e.imageUrl}}"
+         class="card-img-top img-fluid"
+         style="height: 200px; object-fit: cover;">
 
-      <div class="card-body">
-        <h5 class="card-title">{{ e.title }}</h5>
-        <p class="text-muted">{{e.price}}</p>
-        <p>{{e.location}}</p>
-        <p class="fw-bold">{{e.nbPlaces}}</p>
-        <p>{{ e.description }}</p>
-        <!-- Bouton Like -->
-        <button class="btn btn-sm btn-primary" (click)="likeEvent(e)">
-          👍 Like {{e.nbrLike}}
+    <!-- Contenu -->
+    <div class="card-body">
+      <!-- Titre et disponibilité -->
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title"  
+              [ngStyle]="{'color': e.nbPlaces===0 ? 'red' : 'green'}">
+          {{ e.title }}
+        </h5>
+        <span class="badge bg-secondary">{{ e.nbPlaces }} places</span>
+      </div>
+
+      <!-- Prix et localisation -->
+      <p class="text-muted mb-1">{{ e.price }} | {{ e.location }}</p>
+
+      <!-- Description -->
+      <p class="mb-2">{{ e.description }}</p>
+
+      <!-- Boutons -->
+      <div class="d-flex gap-2 mb-2">
+        <button [ngClass]="{'btn':true,'btn-danger': e.nbrLike >= 5,'btn-warning': e.nbrLike < 5}"
+                (click)="likeEvent(e)">
+          👍 Like {{ e.nbrLike }}
         </button>
 
-        <button class="btn btn-sm btn-danger"
-                [disabled]="e.nbPlaces==0" (click)="nbrPlaceDecr(e)" ><!--Property Binding--->
-          buy ticket
+        <button class="btn btn-sm btn-primary"
+                [disabled]="e.nbPlaces==0" 
+                (click)="nbrPlaceDecr(e)">
+          Buy ticket
         </button>
-        <!--exercice: pipe date--->
-        <span class="ms-2">{{ e.date }}</span>
-        <a [routerLink]="['./details',e.id]">
-          more details
-        </a>
+      </div>
+
+      <!-- Date et lien -->
+      <div class="d-flex justify-content-between align-items-center">
+        <span>{{ e.date | datePers }}</span>
+<a [routerLink]="['./details', e.id]" class="btn btn-success btn-sm">
+  More details
+</a>
       </div>
     </div>
   </div>
+</div>
 
