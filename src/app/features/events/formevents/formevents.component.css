@@ -76,3 +76,12 @@
     font-size: 15px;
   }
 }
+.error small {
+  color: red;
+  display: block;
+  margin-top: 3px;
+}
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: red;
+}
