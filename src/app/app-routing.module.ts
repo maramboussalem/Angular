@@ -5,7 +5,6 @@ import {NotFoundComponent} from './layout/not-found/not-found.component';
 import {ListEventComponent} from './features/events/list-event/list-event.component';
 
 const routes: Routes = [
-
   {path: 'home', component: HomeComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   { path: 'events',

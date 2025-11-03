@@ -1,0 +1,38 @@
+<div class="simple-form-container">
+  <h2>Add Event</h2>
+
+  <form class="simple-form" #f="ngForm">
+    <label id="title">Title</label>
+    <input name="title" [(ngModel)]="title" type="text"
+            minlength="3" required #t="ngModel"/>
+    <div class="alert alert-danger" *ngIf="t.touched && t.invalid">
+       <div *ngIf="t.hasError('required')">this field is required</div>
+       <div *ngIf="t.hasError('minlength')"> minlength is 3 </div>
+    </div>
+    <!-----lenght >10------>
+    <label for="description">Description</label>
+    <textarea id="description" placeholder="Décrivez votre événement..."></textarea>
+   <!----date > currentDate--------->
+    <label for="date">Date</label>
+    <input id="date" type="date" />
+
+    <label for="location">Place</label>
+    <input id="location" type="text" placeholder="Ex: Tunis" />
+
+    <label for="price">Price(DT)</label>
+    <input id="price" type="number" placeholder="Ex: 25" />
+    <!----place > 5--------->
+    <label for="nbPlaces">nbr Place</label>
+    <input id="nbPlaces" type="number" placeholder="Ex: 100" />
+    <!----respect this format https://exemple.com/image.jpg/png--------->
+    <label for="imageUrl">Image (URL)</label>
+    <input id="imageUrl" type="text" placeholder="https://exemple.com/image.jpg" />
+
+    <button type="button" class="btn" [disabled]="f.invalid"
+            (click)="save()">
+      add event
+    </button>
+  </form>
+</div>
+
+<hr>
