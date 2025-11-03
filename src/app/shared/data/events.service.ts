@@ -12,7 +12,7 @@ export class EventsService {
       description: 'Angular v18',
       date: new Date('2025-11-10'),
       location: 'Tunis',
-      price: 50,
+      price: 50.23456,
       organizerId: 10,
       imageUrl: 'https://th.bing.com/th/id/OIP.58BA6h6N8hyKCe2O9S5NwAHaD4?w=329&h=180&c=7&r=0&o=7&pid=1.7&rm=3',
       nbPlaces:5,

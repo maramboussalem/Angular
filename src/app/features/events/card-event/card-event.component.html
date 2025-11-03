@@ -11,8 +11,8 @@
             [ngStyle]="{'color':e.nbPlaces==0?'red':'green'}">
           {{ e.title }}
         </h5>
-        <p class="text-muted">{{e.price}}</p>
-        <p>{{e.location}}</p>
+        <p class="text-muted">{{e.price|euro}}</p>
+        <p>{{e.location|uppercase}}</p>
         <p class="fw-bold">{{e.nbPlaces}}</p>
         <p>{{ e.description }}</p>
         <!-- Bouton Like -->
