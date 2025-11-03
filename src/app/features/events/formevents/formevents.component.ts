@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './formevents.component.css'
 })
 export class FormeventsComponent {
+   title: string;
+
+
+  save(){
+
+  }
 
 
   title: string = '';
