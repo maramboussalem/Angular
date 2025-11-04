@@ -1,0 +1,210 @@
+<div class="container py-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-white">
+      <h3 class="mb-0">Créer / éditer un événement</h3>
+      <small class="text-muted"
+        >Remplissez les informations principales de l'événement</small
+      >
+    </div>
+
+    <div class="card-body">
+      <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <input type="hidden" name="id" [(ngModel)]="model.id" />
+
+        <div class="row g-4">
+          <!-- Left column: main fields -->
+          <div class="col-lg-8">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-floating">
+                  <input
+                    name="title"
+                    id="title"
+                    class="form-control"
+                    required
+                    minlength="3"
+                    [(ngModel)]="model.title"
+                    #title="ngModel"
+                    placeholder="Titre de l'événement"
+                  />
+                  <label for="title">Titre *</label>
+                </div>
+                <div
+                  class="text-danger small mt-1"
+                  *ngIf="title.invalid && title.touched"
+                >
+                  Le titre est requis (min 3 caractères).
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label d-block">Date & heure *</label>
+                <div class="d-flex gap-2">
+                  <input
+                    name="date"
+                    id="date"
+                    type="date"
+                    class="form-control"
+                    required
+                    [(ngModel)]="model.date"
+                    #date="ngModel"
+                  />
+                  <input
+                    name="time"
+                    id="time"
+                    type="time"
+                    class="form-control"
+                    [(ngModel)]="model.time"
+                  />
+                </div>
+                <div
+                  class="text-danger small mt-1"
+                  *ngIf="date.invalid && date.touched"
+                >
+                  La date est requise.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    name="location"
+                    id="location"
+                    class="form-control"
+                    [(ngModel)]="model.location"
+                    placeholder="Lieu"
+                  />
+                  <label for="location">Lieu</label>
+                </div>
+                <small class="text-muted">Ex : Salle A, Centre-ville</small>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Prix</label>
+                <div class="input-group">
+                  <span class="input-group-text">€</span>
+                  <input
+                    name="price"
+                    type="number"
+                    min="0"
+                    class="form-control"
+                    [(ngModel)]="model.price"
+                    placeholder="0.00"
+                  />
+                </div>
+                <small class="text-muted">Laisser à 0 pour gratuit</small>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Nombre de places</label>
+                <input
+                  name="nbrPlaces"
+                  type="number"
+                  min="0"
+                  class="form-control"
+                  [(ngModel)]="model.nbrPlaces"
+                  placeholder="Ex : 100"
+                />
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea
+                  name="description"
+                  rows="5"
+                  class="form-control"
+                  [(ngModel)]="model.description"
+                  maxlength="1000"
+                  placeholder="Décrivez brièvement l'événement..."
+                ></textarea>
+                <div
+                  class="d-flex justify-content-between mt-1 small text-muted"
+                >
+                  <div>
+                    Utilisez 1-2 phrases claires pour attirer l'attention.
+                  </div>
+                  <div>{{ model.description?.length || 0 }} / 1000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: image preview and misc -->
+          <div class="col-lg-4">
+            <div class="mb-3">
+              <label class="form-label">Image (URL)</label>
+              <input
+                name="imageUrl"
+                type="url"
+                class="form-control"
+                [(ngModel)]="model.imageUrl"
+                placeholder="https://..."
+                aria-label="Image URL"
+              />
+              <small class="text-muted"
+                >URL d'une image reprenant l'événement (paysage
+                recommandé)</small
+              >
+            </div>
+
+            <div class="card border-0 mb-3">
+              <div
+                class="ratio ratio-4x3 rounded overflow-hidden"
+                style="background: #f8f9fa"
+              >
+                <img
+                  [src]="
+                    model.imageUrl ||
+                    'https://via.placeholder.com/800x600?text=Preview'
+                  "
+                  class="img-fluid"
+                  alt="Aperçu de l'image"
+                  style="object-fit: cover; width: 100%; height: 100%"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Nombre de likes</label>
+              <div class="input-group">
+                <span class="input-group-text">👍</span>
+                <input
+                  name="nbrLikes"
+                  type="number"
+                  min="0"
+                  class="form-control"
+                  [(ngModel)]="model.nbrLikes"
+                />
+              </div>
+              <small class="text-muted"
+                >Valeur initiale affichée dans la liste</small
+              >
+            </div>
+
+            <div class="alert alert-info small">
+              Astuce : fournissez un titre clair, une bonne image et une
+              description courte pour améliorer le taux de participation.
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer bg-white d-flex justify-content-end gap-2 mt-4">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            routerLink="../"
+          >
+            Annuler
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="form.invalid"
+          >
+            Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
