@@ -10,6 +10,7 @@ import { DetailEventComponent } from './detail-event/detail-event.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import {DataEventsService} from '../../shared/services/data-events.service';
 import { CardEventComponent } from './card-event/card-event.component';
+import { FormEventComponent } from './form-event/form-event.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CardEventComponent } from './card-event/card-event.component';
     ListEventComponent,
     DetailEventComponent,
     SideBarComponent,
-    CardEventComponent
+    CardEventComponent,
+    FormEventComponent
   ],
   imports: [
     CommonModule,
