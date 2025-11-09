@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {EventsService} from '../../../shared/data/events.service';
+import {Eventy} from '../../../models/eventy';
 
 @Component({
   selector: 'app-formevents',
@@ -6,38 +8,17 @@ import { Component } from '@angular/core';
   styleUrl: './formevents.component.css'
 })
 export class FormeventsComponent {
-   title: string;
-
-
-  save(){
-
-  }
-
-
-  title: string = '';
-  description: string = '';
-  date: string = '';
-  location: string = '';
-  price: number | null = null;
-  nbPlaces: number | null = null;
-  imageUrl: string = '';
+ eventy=new Eventy() ;
 
   today: string = new Date().toISOString().split('T')[0];
 
-  constructor() {}
-
+  constructor(private dataService:EventsService) {}
 
   save() {
-  console.log('Form data:', {
-    title: this.title,
-    description: this.description,
-    date: this.date,
-    location: this.location,
-    price: this.price,
-    nbPlaces: this.nbPlaces,
-    imageUrl: this.imageUrl
-  });
+
+
   // Call your service here
+    this.dataService.addEvent(this.eventy);
 }
 
 }

@@ -1,14 +1,15 @@
 <div class="simple-form-container">
   <h2>Add Event</h2>
 
-  <form class="simple-form" #eventForm="ngForm" (ngSubmit)="save()" novalidate>
+  <form class="simple-form" #eventForm="ngForm"
+        (ngSubmit)="save()" novalidate>
 
-   
+
     <label for="title">Title</label>
     <input
       id="title"
       name="title"
-      [(ngModel)]="title"
+      [(ngModel)]="eventy.title"
       type="text"
       placeholder="Titre de l'événement"
       required
@@ -20,12 +21,12 @@
       <small *ngIf="titleCtrl.errors?.['minlength']">Title must be at least 3 characters</small>
     </div>
 
-   
+
     <label for="description">Description</label>
     <textarea
       id="description"
       name="description"
-      [(ngModel)]="description"
+      [(ngModel)]="eventy.description"
       placeholder="Décrivez votre événement..."
       maxlength="200"
       minlength="10"
@@ -36,12 +37,12 @@
       <small *ngIf="descCtrl.errors?.['minlength']">Min 10 characters allowed</small>
     </div>
 
-   
+
     <label for="date">Date</label>
     <input
       id="date"
       name="date"
-      [(ngModel)]="date"
+      [(ngModel)]="eventy.date"
       type="date"
       required
       [min]="today"
@@ -51,12 +52,12 @@
       <small>Date is required</small>
     </div>
 
-    
+
     <label for="location">Place</label>
     <input
       id="location"
       name="location"
-      [(ngModel)]="location"
+      [(ngModel)]="eventy.location"
       type="text"
       placeholder="Ex: Tunis"
       required
@@ -66,12 +67,12 @@
       <small>Location is required</small>
     </div>
 
-   
+
     <label for="price">Price (DT)</label>
     <input
       id="price"
       name="price"
-      [(ngModel)]="price"
+      [(ngModel)]="eventy.price"
       type="number"
       placeholder="Ex: 25"
       required
@@ -83,12 +84,12 @@
       <small *ngIf="priceCtrl.errors?.['min']">Price cannot be negative</small>
     </div>
 
-    
+
     <label for="nbPlaces">Number of Places</label>
     <input
       id="nbPlaces"
       name="nbPlaces"
-      [(ngModel)]="nbPlaces"
+      [(ngModel)]="eventy.nbPlaces"
       type="number"
       placeholder="Ex: 100"
       required
@@ -100,12 +101,12 @@
       <small *ngIf="nbCtrl.errors?.['min']">Must be at least 1</small>
     </div>
 
-   
+
     <label for="imageUrl">Image (URL)</label>
     <input
       id="imageUrl"
       name="imageUrl"
-      [(ngModel)]="imageUrl"
+      [(ngModel)]="eventy.imageUrl"
       type="url"
       placeholder="https://exemple.com/image.jpg"
       required
@@ -117,8 +118,8 @@
       <small *ngIf="imgCtrl.errors?.['pattern']">Enter a valid URL (must start with http or https)</small>
     </div>
 
-    
-    <button type="submit" class="btn" [disabled]="eventForm.valid">
+
+    <button type="submit" class="btn" [disabled]="eventForm.invalid">
       Add Event
     </button>
 

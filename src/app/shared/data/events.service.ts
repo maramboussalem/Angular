@@ -41,4 +41,8 @@ export class EventsService {
      //conditions
       return this.list[id];
   }
+
+  public addEvent(event:Eventy){
+      this.list.push(event);
+  }
 }
