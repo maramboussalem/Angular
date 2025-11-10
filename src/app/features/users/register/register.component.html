@@ -1,0 +1,25 @@
+<div>
+  <form [formGroup]="formRegister">
+    <div class="form-group">
+      <label>first Name</label>
+      <input type="text" name="fName" class="form-control"
+             formControlName="firstName">
+    </div>
+    <div class="form-group">
+      <label>last Name</label>
+      <input type="text" name="lName" class="form-control"
+             formControlName="lastName">
+    </div>
+    <div class="form-group">
+      <label>email</label>
+      <input type="email" name="email" class="form-control"
+             formControlName="email">
+    </div>
+    <div class="form-group">
+      <label>password</label>
+      <input type="password" name="psw" class="form-control"
+             formControlName="password">
+    </div>
+     <input type="submit" value="save" class="btn btn-primary">
+  </form>
+</div>
