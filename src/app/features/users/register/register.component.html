@@ -1,0 +1,66 @@
+<div>
+  <form [formGroup]="formRegister" (ngSubmit)="save()">
+
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" name="fName" class="form-control" formControlName="firstName">
+    </div>
+    <div class="alert alert-danger" *ngIf="formRegister.get('firstName')?.invalid">
+      <div *ngIf="formRegister.get('firstName')?.hasError('required')">
+        This field is required
+      </div>
+      <div *ngIf="formRegister.get('firstName')?.hasError('minlength')">
+        Please give a valid name with at least 3 characters
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" name="lName" class="form-control" formControlName="lastName">
+    </div>
+    <div class="alert alert-danger" *ngIf="formRegister.get('lastName')?.invalid">
+      <div *ngIf="formRegister.get('lastName')?.hasError('required')">
+        This field is required
+      </div>
+      <div *ngIf="formRegister.get('lastName')?.hasError('minlength')">
+        Please give a valid name with at least 3 characters
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="email" class="form-control" formControlName="email">
+      <div class="alert alert-danger" *ngIf="formRegister.get('email')?.hasError('pattern')">
+        Email invalide (ex: name&#64;esprit.tn)
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" name="psw" class="form-control" formControlName="password">
+      <div class="alert alert-danger" *ngIf="formRegister.get('password')?.hasError('pattern')">
+        Password invalide (min 8 char, 1 maj, 1 min, 1 chiffre, 1 spécial)
+      </div>
+    </div>
+
+    <div formGroupName="address">
+      <h5>Address</h5>
+      <input type="text" formControlName="street" placeholder="Street" class="form-control">
+      <input type="text" formControlName="city" placeholder="City" class="form-control">
+      <input type="text" formControlName="state" placeholder="State" class="form-control">
+      <input type="text" formControlName="zip" placeholder="Zip" class="form-control">
+    </div>
+
+    <div formArrayName="phones">
+  <h5>Phones</h5>
+  <div *ngFor="let phone of phones.controls; let i = index">
+    <input [formControlName]="i" placeholder="Phone number" class="form-control mb-1">
+  </div>
+  <button type="button" class="btn btn-secondary btn-sm mt-1" (click)="addPhone()">+ Add Phone</button>
+</div>
+
+
+    <input type="submit" value="Save" class="btn btn-primary mt-3">
+
+  </form>
+</div>
