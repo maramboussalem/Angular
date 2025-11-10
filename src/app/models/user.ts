@@ -4,4 +4,11 @@ export class User {
   lastName: string;
   email: string;
   password: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+  }
+  phones: string[];
 }
