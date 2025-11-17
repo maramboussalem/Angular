@@ -9,9 +9,17 @@ import {Eventy} from '../../../models/eventy';
 export class CardEventComponent {
   //data ???
   @Input() event: Eventy;
-  @Output() eventNotifParent:EventEmitter<Eventy>  =
-    new EventEmitter();
+  @Input() searchValue: string;
+  
+  @Output() eventNotifParent:EventEmitter<Eventy>  = new EventEmitter();
+  
   notifParent(e: Eventy) {
     this.eventNotifParent.emit(e);
+  }
+
+  nbrPlaceDecr(e: Eventy) {
+    if (e.nbrPlaces > 0) {
+      e.nbrPlaces--;
+    }
   }
 }
