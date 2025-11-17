@@ -10,9 +10,11 @@ import { Subscription } from 'rxjs';
   styleUrl: './list-event.component.css',
 })
 export class ListEventComponent implements OnInit, OnDestroy {
-  list: Eventy[];
-  private filters: any = {};
+  list: Eventy[] = [];
+  searchTerm: string = '';
+  selectedLocation: string = '';
   private filterSubscription: Subscription;
+  private eventsSubscription: Subscription;
 
   constructor(
     private dataService: DataEventsService,
@@ -20,10 +22,21 @@ export class ListEventComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.list = this.dataService.getAllEvents();
+    // S'abonner à l'Observable retourné par le service
+    this.eventsSubscription = this.dataService.getAllEvents().subscribe({
+      next: (events) => {
+        this.list = events;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des événements:', error);
+        this.list = [];
+      }
+    });
     
+    // S'abonner aux changements de filtres depuis la sidebar
     this.filterSubscription = this.filterService.filters$.subscribe(filters => {
-      this.filters = filters;
+      this.searchTerm = filters.searchText;
+      this.selectedLocation = filters.selectedLocation;
     });
   }
 
@@ -31,69 +44,25 @@ export class ListEventComponent implements OnInit, OnDestroy {
     if (this.filterSubscription) {
       this.filterSubscription.unsubscribe();
     }
+    if (this.eventsSubscription) {
+      this.eventsSubscription.unsubscribe();
+    }
   }
 
   get filteredList(): Eventy[] {
     let filtered = this.list;
 
     // Filtre par titre
-    if (this.filters.searchText && this.filters.searchText.trim() !== '') {
+    if (this.searchTerm && this.searchTerm.trim() !== '') {
       filtered = filtered.filter(event => 
-        event.title.toLowerCase().includes(this.filters.searchText.toLowerCase())
+        event.title.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
 
     // Filtre par lieu
-    if (this.filters.selectedLocation && this.filters.selectedLocation !== '') {
+    if (this.selectedLocation && this.selectedLocation !== '') {
       filtered = filtered.filter(event => 
-        event.location === this.filters.selectedLocation
-      );
-    }
-
-    // Filtre par prix min
-    if (this.filters.minPrice !== null && this.filters.minPrice !== '') {
-      filtered = filtered.filter(event => 
-        event.price >= this.filters.minPrice
-      );
-    }
-
-    // Filtre par prix max
-    if (this.filters.maxPrice !== null && this.filters.maxPrice !== '') {
-      filtered = filtered.filter(event => 
-        event.price <= this.filters.maxPrice
-      );
-    }
-
-    // Filtre par date
-    const today = new Date();
-    const oneWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-    const oneMonth = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-
-    if (this.filters.dateFilter === 'upcoming') {
-      filtered = filtered.filter(event => new Date(event.date) >= today);
-    } else if (this.filters.dateFilter === 'thisWeek') {
-      filtered = filtered.filter(event => {
-        const eventDate = new Date(event.date);
-        return eventDate >= today && eventDate <= oneWeek;
-      });
-    } else if (this.filters.dateFilter === 'thisMonth') {
-      filtered = filtered.filter(event => {
-        const eventDate = new Date(event.date);
-        return eventDate >= today && eventDate <= oneMonth;
-      });
-    }
-
-    // Filtre par disponibilité
-    if (this.filters.availabilityFilter === 'available') {
-      filtered = filtered.filter(event => event.nbrPlaces > 0);
-    } else if (this.filters.availabilityFilter === 'full') {
-      filtered = filtered.filter(event => event.nbrPlaces === 0);
-    }
-
-    // Filtre par organisateur
-    if (this.filters.organizerId !== null && this.filters.organizerId !== '') {
-      filtered = filtered.filter(event => 
-        event.organizerId === Number(this.filters.organizerId)
+        event.location === this.selectedLocation
       );
     }
 
@@ -102,5 +71,16 @@ export class ListEventComponent implements OnInit, OnDestroy {
 
   likeEvent(event: Eventy) {
     event.nbrLikes++;
+    // Mettre à jour l'événement dans le backend
+    this.dataService.updateEvent(event.id, event).subscribe({
+      next: (updatedEvent) => {
+        console.log('Événement mis à jour:', updatedEvent);
+      },
+      error: (error) => {
+        console.error('Erreur lors de la mise à jour:', error);
+        // Annuler l'incrémentation en cas d'erreur
+        event.nbrLikes--;
+      }
+    });
   }
 }
