@@ -11,10 +11,17 @@ import {Router} from '@angular/router';
 export class FormEventComponent {
   today = new Date().toISOString().split('T')[0];
   event: Eventy = new Eventy();
+  
   constructor(private service:DataEventsService, private router:Router) {
   }
+
   save() {
-    this.service.addEvent(this.event);
-    this.router.navigate(['events']);
+  this.service.addEvent(this.event).subscribe({
+    next: (res) => {
+      console.log('Événement ajouté avec succès :', res);
+      this.router.navigate(['events']);
+    }
+  });
   }
+
 }

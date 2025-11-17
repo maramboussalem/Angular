@@ -12,7 +12,8 @@ export class CardEventComponent {
   @Input() searchValue: string;
   
   @Output() eventNotifParent:EventEmitter<Eventy>  = new EventEmitter();
-  
+  @Output() eventDelete: EventEmitter<Eventy> = new EventEmitter();
+
   notifParent(e: Eventy) {
     this.eventNotifParent.emit(e);
   }
@@ -21,5 +22,9 @@ export class CardEventComponent {
     if (e.nbrPlaces > 0) {
       e.nbrPlaces--;
     }
+  }
+
+  deleteEvent(e: Eventy) {
+    this.eventDelete.emit(e); // émet l'événement vers le parent
   }
 }
