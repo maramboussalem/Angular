@@ -15,6 +15,12 @@ export class ListEventComponent implements OnInit, OnDestroy {
   selectedLocation: string = '';
   private filterSubscription: Subscription;
   private eventsSubscription: Subscription;
+  minPrice: number | null = null;
+maxPrice: number | null = null;
+availabilityFilter: string = 'all';
+dateFilter: string = 'all';
+organizerId: number | null = null;
+
 
   constructor(
     private dataService: DataEventsService,
@@ -32,12 +38,16 @@ export class ListEventComponent implements OnInit, OnDestroy {
         this.list = [];
       }
     });
-    
-    // S'abonner aux changements de filtres depuis la sidebar
     this.filterSubscription = this.filterService.filters$.subscribe(filters => {
-      this.searchTerm = filters.searchText;
-      this.selectedLocation = filters.selectedLocation;
-    });
+  this.searchTerm = filters.searchText;
+  this.selectedLocation = filters.selectedLocation;
+  this.minPrice = filters.minPrice;
+  this.maxPrice = filters.maxPrice;
+  this.dateFilter = filters.dateFilter;
+  this.availabilityFilter = filters.availabilityFilter;
+  this.organizerId = filters.organizerId;
+});
+
   }
 
   ngOnDestroy() {
@@ -50,37 +60,48 @@ export class ListEventComponent implements OnInit, OnDestroy {
   }
 
   get filteredList(): Eventy[] {
-    let filtered = this.list;
-
+  return this.list.filter(event => {
     // Filtre par titre
-    if (this.searchTerm && this.searchTerm.trim() !== '') {
-      filtered = filtered.filter(event => 
-        event.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    }
+    const matchTitle = !this.searchTerm || event.title.toLowerCase().includes(this.searchTerm.toLowerCase());
 
     // Filtre par lieu
-    if (this.selectedLocation && this.selectedLocation !== '') {
-      filtered = filtered.filter(event => 
-        event.location === this.selectedLocation
-      );
-    }
+    const matchLocation = !this.selectedLocation || event.location === this.selectedLocation;
 
-    return filtered;
-  }
+    // Filtre par prix
+    const matchMinPrice = !this.minPrice || event.price >= this.minPrice;
+    const matchMaxPrice = !this.maxPrice || event.price <= this.maxPrice;
+
+    // Filtre par disponibilité
+    const matchAvailability =
+      !this.availabilityFilter ||
+      this.availabilityFilter === 'all' ||
+      (this.availabilityFilter === 'available' && event.nbrPlaces > 0) ||
+      (this.availabilityFilter === 'full' && event.nbrPlaces === 0);
+
+
+    // Filtre par organisateur
+    const matchOrganizer = !this.organizerId || event.organizerId === this.organizerId;
+
+    return matchTitle && matchLocation && matchMinPrice && matchMaxPrice &&
+           matchAvailability  && matchOrganizer;
+  });
+}
+
 
   likeEvent(event: Eventy) {
-    event.nbrLikes++;
-    // Mettre à jour l'événement dans le backend
-    this.dataService.updateEvent(event.id, event).subscribe({
-      next: (updatedEvent) => {
-        console.log('Événement mis à jour:', updatedEvent);
-      },
-      error: (error) => {
-        console.error('Erreur lors de la mise à jour:', error);
-        // Annuler l'incrémentation en cas d'erreur
-        event.nbrLikes--;
-      }
+  event.nbrLikes++;
+  this.dataService.updateEvent(event.id, event).subscribe(() => {
+  });
+  }
+
+
+onDelete(eventToDelete: Eventy) {
+  if (confirm(`Voulez-vous vraiment supprimer l'événement "${eventToDelete.title}" ?`)) {
+    this.dataService.deleteEvent(eventToDelete.id).subscribe(() => {
+      // Supprime l'événement de la liste locale
+      this.list = this.list.filter(e => e.id !== eventToDelete.id);
     });
   }
+}
+
 }
