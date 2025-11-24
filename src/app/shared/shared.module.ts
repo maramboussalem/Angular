@@ -11,7 +11,8 @@ import { EuroPipe } from './pipes/euro.pipe';
   exports: [
     DateTransferPipe,
     NgHoverDirective,
-    EuroPipe
+    EuroPipe,
+  
   ],
   imports: [
     CommonModule
