@@ -9,6 +9,7 @@ import { DetailEventComponent } from './detail-event/detail-event.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { CardEventComponent } from './card-event/card-event.component';
 import { FormEventComponent } from './form-event/form-event.component';
+import { FeedbacksModule } from '../feedbacks/feedbacks.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormEventComponent } from './form-event/form-event.component';
     CommonModule,
     EventsRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    FeedbacksModule
   ],
  // providers:[DataEventsService]
 })

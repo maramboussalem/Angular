@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataEventsService } from '../../../shared/services/data-events.service';
 import { Eventy } from '../../../models/eventy';
+import { FeedbackService } from '../../../shared/services/feedback.service';
 
 @Component({
   selector: 'app-detail-event',
@@ -12,9 +13,13 @@ export class DetailEventComponent implements OnInit {
 
   currentEvent: Eventy;
 
+  defaultUserId: number = 1;
+
   constructor(
     private route: ActivatedRoute,
-    private eventService: DataEventsService
+    private eventService: DataEventsService,
+    private feedbackService: FeedbackService
+
   ) {}
 
   ngOnInit() {
