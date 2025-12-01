@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
     this.newFeedback.eventId = eventId;
 
     this.loadFeedbacks();
-
+//
     this.dataEventsService.getEventById(eventId).subscribe(event => {
       this.currentEvent = event;
 
