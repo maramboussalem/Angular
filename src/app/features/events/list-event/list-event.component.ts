@@ -16,10 +16,10 @@ export class ListEventComponent implements OnInit, OnDestroy {
   private filterSubscription: Subscription;
   private eventsSubscription: Subscription;
   minPrice: number | null = null;
-maxPrice: number | null = null;
-availabilityFilter: string = 'all';
-dateFilter: string = 'all';
-organizerId: number | null = null;
+  maxPrice: number | null = null;
+  availabilityFilter: string = 'all';
+  dateFilter: string = 'all';
+  organizerId: number | null = null;
 
 
   constructor(
@@ -39,9 +39,9 @@ organizerId: number | null = null;
       }
     });
     this.filterSubscription = this.filterService.filters$.subscribe(filters => {
-  this.searchTerm = filters.searchText;
-  this.selectedLocation = filters.selectedLocation;
-  this.minPrice = filters.minPrice;
+    this.searchTerm = filters.searchText;
+    this.selectedLocation = filters.selectedLocation;
+   this.minPrice = filters.minPrice;
   this.maxPrice = filters.maxPrice;
   this.dateFilter = filters.dateFilter;
   this.availabilityFilter = filters.availabilityFilter;
