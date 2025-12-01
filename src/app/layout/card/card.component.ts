@@ -5,7 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-card-event',
   standalone: true,
   imports: [CommonModule,SharedModule,RouterModule],
   templateUrl: './card.component.html',

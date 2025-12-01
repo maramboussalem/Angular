@@ -96,13 +96,13 @@
 
   <div class="row g-4">
     <div class="col-md-4" *ngFor="let event of events">
-      <app-card 
+      <app-card-event 
         [event]="event" 
         [searchValue]="searchValue"
         (eventNotifParent)="handleLike($event)"
         (eventBuyTicket)="handleBuy($event)"
         (eventDelete)="handleDelete($event)">
-      </app-card>
+      </app-card-event>
     </div>
   </div>
 </section>
