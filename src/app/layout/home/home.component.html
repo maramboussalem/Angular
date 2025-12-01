@@ -84,3 +84,25 @@
     </div>
   </div>
 </section>
+
+
+
+<!-- Section Top Événements -->
+<section class="container py-5">
+  <h2 class="fw-bold text-center mb-4">Top Événements</h2>
+  <p class="text-center text-muted mb-5">
+    Découvrez les événements les plus populaires du moment et réservez vos tickets dès maintenant !
+  </p>
+
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let event of events">
+      <app-card-event 
+        [event]="event" 
+        [searchValue]="searchValue"
+        (eventNotifParent)="handleLike($event)"
+        (eventBuyTicket)="handleBuy($event)"
+        (eventDelete)="handleDelete($event)">
+      </app-card-event>
+    </div>
+  </div>
+</section>

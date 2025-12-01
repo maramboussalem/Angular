@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -10,6 +10,7 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './layout/card/card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     SharedModule,
+    CardComponent,
     HttpClientModule
   ],
   providers: [],

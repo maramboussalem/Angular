@@ -4,6 +4,7 @@ import { EventsComponent } from './events.component';
 import { ListEventComponent } from './list-event/list-event.component';
 import { DetailEventComponent } from './detail-event/detail-event.component';
 import { FormEventComponent } from './form-event/form-event.component';
+import { authGuard } from '../../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ListEventComponent },
       { path: 'detail/:id', component: DetailEventComponent },
-      { path: 'form', component: FormEventComponent },
+      { path: 'form', component: FormEventComponent ,canActivate: [authGuard]  },
     ],
   },
 ];

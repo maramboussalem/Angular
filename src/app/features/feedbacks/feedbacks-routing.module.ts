@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeedbacksComponent } from './feedbacks.component';
 import { FormComponent } from './form/form.component';
-
+import { authGuard } from '../../guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
     component: FeedbacksComponent,
     children: [
-      { path: ':id', component: FormComponent }
+      { path: ':id', component: FormComponent  }
     ]
   }
 ];
