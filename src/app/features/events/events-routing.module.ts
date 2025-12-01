@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { EventsComponent } from './events.component';
 import {ListEventComponent} from "./list-event/list-event.component";
 import {DetailEventComponent} from "./detail-event/detail-event.component";
-import { FormeventsComponent } from './formevents/formevents.component';
+import {FormEventComponent} from './form-event/form-event.component';
 
 const routes: Routes = [
     { path: '', component: EventsComponent, children: [
             { path: '', component: ListEventComponent },
             {path:'details/:id', component: DetailEventComponent},
-            {path:'newEvent' ,  component:FormeventsComponent}
+           {path:'newEvent', component: FormEventComponent},
       ]}
 
 ]

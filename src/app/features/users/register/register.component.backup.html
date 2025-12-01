@@ -1,0 +1,34 @@
+<div>
+  <form [formGroup]="formRegister" (ngSubmit)="save()">
+    <div class="form-group">
+      <label>first Name</label>
+      <input type="text" name="fName" class="form-control"
+             formControlName="firstName">
+    </div>
+    <div class="alert alert-danger" *ngIf="formRegister.get('firstName')?.invalid">
+      <div *ngIf="formRegister.get('firstName')?.hasError('required')">
+       this field is required
+      </div>
+      <div *ngIf="formRegister.get('firstName')?.hasError('minlength')">
+        please give a valid name with 3 char
+      </div>
+    </div>
+    <div class="form-group">
+      <label>last Name</label>
+      <input type="text" name="lName" class="form-control"
+             formControlName="lastName">
+    </div>
+    <div class="form-group">
+      <label>email</label>
+      <input type="email" name="email" class="form-control"
+             formControlName="email">
+    </div>
+    <div class="form-group">
+      <label>password</label>
+      <input type="password" name="psw" class="form-control"
+             formControlName="password">
+    </div>
+
+     <input type="submit" value="save" class="btn btn-primary">
+  </form>
+</div>

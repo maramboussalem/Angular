@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../models/user';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'app-register',
@@ -8,33 +8,33 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  user: User;
-  formRegister: FormGroup;
+  gForm: FormGroup;
   constructor() {
-  }
-  ngOnInit() {
-    this.user = new User();
-    this.formRegister = new FormGroup({
-      firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-
+    }
+    ngOnInit() {
+    this.gForm = new FormGroup({
+      firstName: new FormControl('',
+                    [Validators.required, Validators.minLength(3)]),
+      lastName: new FormControl('',
+                    [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('',
+        [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/),Validators.minLength(8)]),
+      address: new FormGroup({
+        street: new FormControl('',[Validators.required, Validators.minLength(3)]),
+        city: new FormControl('',[Validators.required, Validators.minLength(3)]),
+        state: new FormControl('',[Validators.required, Validators.minLength(3)]),
+        zip: new FormControl('',[Validators.required, Validators.minLength(4)]),
+      })
     })
-  }
-  save(){
-    this.user=this.formRegister.getRawValue();
-    console.log(this.user);
-    //service to persist the object => save
-    //
+    }
+  //1- pattern for the password a..zA..Z@&0..9 (8 charact)
+  //2-add the address ()
+  //3-phones[]
 
-  }
-  //todo 0=> pattern for email => a..z"@"a..z"."a..z & password => 8 char => aA1@
-  // todo 1=> work on address: {
-  //     street: string;
-  //     city: string;
-  //     state: string;
-  //     zip: string;
-  //   }
-  //todo 2=> work on the list of phone numbers => dynamic list +1 number
+    save(){
+    let user=this.gForm.getRawValue();
+    //user push service => backend
+      console.log(user)
+    }
 }

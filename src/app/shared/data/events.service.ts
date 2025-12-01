@@ -1,48 +1,29 @@
 import { Injectable } from '@angular/core';
 import {Eventy} from '../../models/eventy';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-    private list: Eventy[]=[
-    {
-      id:1,
-      title: 'Angular Trainning',
-      description: 'Angular v18',
-      date: new Date('2025-11-10'),
-      location: 'Tunis',
-      price: 50.23456,
-      organizerId: 10,
-      imageUrl: 'https://th.bing.com/th/id/OIP.58BA6h6N8hyKCe2O9S5NwAHaD4?w=329&h=180&c=7&r=0&o=7&pid=1.7&rm=3',
-      nbPlaces:5,
-      nbrLike: 30,
-    },
-    {
-      id:2,
-      title: 'Symfony Training',
-      description: 'Symfony Training V6',
-      date: new Date('2025-12-10'),
-      location: 'Tunis',
-      price: 50,
-      organizerId: 10,
-      imageUrl: 'https://th.bing.com/th/id/OIP.58BA6h6N8hyKCe2O9S5NwAHaD4?w=329&h=180&c=7&r=0&o=7&pid=1.7&rm=3',
-      nbPlaces:0,
-      nbrLike: 0,
-    }
-  ]
-    constructor() { }
-   public getAllEvents(){
-       //cnx backend
-       return this.list;
+  urlBackend = 'http://localhost:3000/events/';
+  constructor(private http: HttpClient) { }
+  public getAllEvents(){
+       return this.http.get<Eventy[]>(this.urlBackend)
   }
-
   public getEventById(id:number){
-     //conditions
-      return this.list[id];
+      return this.http.get<Eventy>(this.urlBackend+id)
   }
-
-  public addEvent(event:Eventy){
-      this.list.push(event);
+  addEvent(event:Eventy){
+    return this.http.post<Eventy>(this.urlBackend, event)
+  }
+  deleteEvent(id:number){
+    return this.http.delete<Eventy>(this.urlBackend+id)
+  }
+  updateEvent(id:number, event:Eventy){
+    return this.http.put<Eventy>(this.urlBackend+id, event)
+  }
+  searchByLocation(location:string){
+    return this.http.get<Eventy[]>(this.urlBackend+'?location='+location)
   }
 }

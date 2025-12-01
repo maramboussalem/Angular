@@ -19,17 +19,13 @@ export class ListEventComponent implements OnInit {
   }
   //methods => action
   ngOnInit() {
-    this.listEvents=this.eventService.getAllEvents();
+    this.eventService.getAllEvents().subscribe(
+      (data:Eventy[]) => {this.listEvents=data;}
+    )
   }
   //method to buy ticket => click on the button buy ticket
   //Haider
-  nbrPlaceDecr(e:Eventy){
-    e.nbPlaces --
-  }
-  //Marwa
-  nbrLike(e:Eventy){
-    e.nbrLike ++
-  }
+
   search(){}
 
 }

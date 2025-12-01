@@ -10,14 +10,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     UsersComponent,
-    RegisterComponent,
-
+    RegisterComponent
   ],
   imports: [
     CommonModule,
-    UsersRoutingModule,
-    //module required to implement the form in the registerComponent
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UsersRoutingModule
   ]
 })
 export class UsersModule { }

@@ -9,8 +9,10 @@ const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   { path: 'events',
     loadChildren: () => import('./features/events/events.module').then(m => m.EventsModule) },
-  { path: 'users', loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule) },
+  { path: 'feedbacks',
+    loadChildren: () => import('./features/feedbacks/feedbacks.module').then(m => m.FeedbacksModule) },
   {path:'**',component:NotFoundComponent},
+   
 ];
 
 @NgModule({

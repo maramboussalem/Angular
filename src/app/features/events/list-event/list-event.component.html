@@ -1,11 +1,12 @@
 <div class="container py-4">
-  
-
-
-   <div class="d-flex justify-content-between align-items-center mb-3">
-  <h2 class="mb-0">Liste des événements</h2>
-<button class="btn btn-primary" [routerLink]="['newEvent']">Add Event</button></div>
-
+ <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">List Events</h2>
+   <a routerLink="./newEvent">
+      <button class="btn btn-lg btn-warning">
+        Add Event
+      </button>
+   </a>
+ </div>
   <!-- Recherche -->
   <input type="text" [(ngModel)]="searchValue"  class="form-control mb-4" placeholder="Rechercher un événement">
 
@@ -13,7 +14,7 @@
 
     <app-card-event class="col-md-4"
                     *ngFor="let event of listEvents"
-                    [e]="event" (notificationLike)="nbrLike(event)" >
+                    [e]="event" >
 
     </app-card-event>
 

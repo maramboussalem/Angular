@@ -1,3 +1,6 @@
+import {Eventy} from './eventy';
+import {Ticket} from './ticket';
+
 export class User {
   id: number;
   firstName: string;
@@ -11,4 +14,6 @@ export class User {
     zip: string;
   }
   phones: string[];
+  events: Eventy[];
+  tickets: Ticket[];
 }
