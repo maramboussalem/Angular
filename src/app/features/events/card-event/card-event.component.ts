@@ -11,18 +11,20 @@ export class CardEventComponent {
   @Input() event: Eventy;
   @Input() searchValue: string;
   
-  @Output() eventNotifParent:EventEmitter<Eventy>  = new EventEmitter();
-  @Output() eventDelete: EventEmitter<Eventy> = new EventEmitter();
+  @Output() eventNotifParent: EventEmitter<Eventy> = new EventEmitter(); // pour Like
+  @Output() eventBuyTicket: EventEmitter<Eventy> = new EventEmitter();   // pour Buy ticket
+  @Output() eventDelete: EventEmitter<Eventy> = new EventEmitter();      // delete
+
+
 
   notifParent(e: Eventy) {
-    this.eventNotifParent.emit(e);
+   this.eventNotifParent.emit(e); // like
   }
 
   nbrPlaceDecr(e: Eventy) {
-    if (e.nbrPlaces > 0) {
-      e.nbrPlaces--;
-    }
+    this.eventBuyTicket.emit(e);   // buy ticket
   }
+
 
   deleteEvent(e: Eventy) {
     this.eventDelete.emit(e); // émet l'événement vers le parent

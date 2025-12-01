@@ -42,11 +42,12 @@
         </button>
 
         <button 
-          class="btn btn-sm btn-primary"
-          [disabled]="event.nbrPlaces == 0"
-          (click)="nbrPlaceDecr(event)">
-          Buy ticket
-        </button>
+  class="btn btn-sm btn-primary"
+  [disabled]="event.nbrPlaces == 0"
+  (click)="nbrPlaceDecr(event)">
+  Buy ticket
+</button>
+
 
         <button 
     class="btn btn-sm btn-outline-danger"
@@ -59,10 +60,11 @@
       <div class="d-flex justify-content-between align-items-center">
         <span>{{ event.date | dateTransfer }}</span>
 
-        <a [routerLink]="['./detail', event.id]" 
-           class="btn btn-success btn-sm">
-          More details
-        </a>
+        <a [routerLink]="['/events/detail', event.id]"
+     class="btn btn-success btn-sm">
+  More details
+</a>
+
       </div>
 
 
