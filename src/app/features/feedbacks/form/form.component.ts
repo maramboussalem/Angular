@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FeedbackService } from '../../../shared/services/feedback.service';
 import { Feedback } from '../../../models/feedback';
+import {Eventy} from '../../../models/eventy';
+import {DataEventsService} from '../../../shared/services/data-events.service';
 
 @Component({
   selector: 'app-form',
@@ -11,6 +13,7 @@ import { Feedback } from '../../../models/feedback';
 export class FormComponent {
 
   feedbacks: Feedback[] = [];
+  listEvents: Eventy[];
 
   editFeedbackId: string | undefined = undefined;  // string pour correspondre au type de fb.id
   editFeedbackData: Feedback = {} as Feedback;
@@ -25,12 +28,28 @@ export class FormComponent {
 
   constructor(
     private feedbackService: FeedbackService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private serviceEvent: DataEventsService
   ) {}
 
   ngOnInit(): void {
     // récupérer eventId depuis l'URL
     const idEvent = this.route.snapshot.paramMap.get('id');
+    let event: Eventy;
+    this.serviceEvent.getEventById(idEvent).subscribe(
+      (data: Eventy) => {
+        event=data; console.log(event);
+        this.serviceEvent.getEventsByLocation(event.location).subscribe(
+          (data: Eventy[]) => {
+            this.listEvents = data;
+            console.log(this.listEvents);
+          }
+        )
+
+      }
+    )
+
+
     this.newFeedback.eventId = idEvent ? Number(idEvent) : 0;
 
     this.loadFeedbacks();
@@ -93,12 +112,12 @@ export class FormComponent {
   // Fonction pour supprimer un feedback
   deleteFeedback(id: string | undefined): void {
     console.log('ID reçu pour suppression:', id);
-    
+
     if (!id) {
       alert('Erreur: ID du feedback non trouvé');
       return;
     }
-    
+
     if (confirm('Êtes-vous sûr de vouloir supprimer ce feedback ?')) {
       this.feedbackService.deleteFeedback(id)
         .subscribe({

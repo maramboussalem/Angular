@@ -14,7 +14,7 @@ export class DataEventsService {
     return this.http.get<Eventy[]>(this.urlBackend);
   }
 
-  getEventById(id: number) {
+  getEventById(id: any) {
     return this.http.get<Eventy>(this.urlBackend + id);
   }
 
@@ -25,9 +25,12 @@ export class DataEventsService {
   deleteEvent(id: number) {
     return this.http.delete(this.urlBackend + id);
   }
-
+  //path param
   updateEvent(id: number, e: Eventy) {
     return this.http.put<Eventy>(this.urlBackend + id, e);
   }
-
+  //query param
+  getEventsByLocation(location: string) {
+    return this.http.get<Eventy[]>(this.urlBackend +'?location=' +location);
+  }
 }
