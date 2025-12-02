@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CommonModule, NgIf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {SharedModule} from "../../shared/shared.module";
 import {EventsService} from "../../shared/data/events.service";
 import {Eventy} from "../../models/eventy";
 import {RouterModule} from "@angular/router";
-
 @Component({
   selector: 'app-card',
   standalone: true,

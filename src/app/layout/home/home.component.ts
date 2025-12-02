@@ -13,8 +13,9 @@ export class HomeComponent implements OnInit {
    }
    ngOnInit() {
      this.service.getAllEvents().subscribe(
-       events => {
-         this.list=events
+       res => {
+         this.list = res.sort((a, b)=> b.nbrLike - a.nbrLike).slice(0, 3);
+
        }
      )
    }
