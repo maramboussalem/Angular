@@ -1,16 +1,25 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Eventy} from '../../../models/eventy';
+import {CommonModule, NgIf} from '@angular/common';
+import {SharedModule} from '../../shared/shared.module';
+import {Eventy} from '../../models/eventy';
+import {RouterModule} from '@angular/router';
 
 @Component({
-  selector: 'app-card-event',
-  templateUrl: './card-event.component.html',
-  styleUrl: './card-event.component.css'
+  selector: 'app-card',
+  standalone: true,
+  imports: [
+   CommonModule,
+    SharedModule,
+    RouterModule
+  ],
+  templateUrl: './card.component.html',
+  styleUrl: './card.component.css'
 })
-export class CardEventComponent {
+export class CardComponent {
   //data ???
   @Input() event: Eventy;
   @Input() searchValue: string;
-  
+
   @Output() eventNotifParent:EventEmitter<Eventy>  = new EventEmitter();
   @Output() eventDelete: EventEmitter<Eventy> = new EventEmitter();
 

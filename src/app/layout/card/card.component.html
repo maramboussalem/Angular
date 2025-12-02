@@ -28,10 +28,10 @@
       <!-- Description -->
       <p class="mb-2">{{ event.description }}</p>
 
-      
+
       <!-- Boutons -->
       <div class="d-flex gap-2 mb-2">
-        <button 
+        <button
           [ngClass]="{
             'btn': true,
             'btn-danger': event.nbrLikes >= 5,
@@ -41,25 +41,25 @@
           👍 Like {{ event.nbrLikes }}
         </button>
 
-        <button 
+        <button
           class="btn btn-sm btn-primary"
           [disabled]="event.nbrPlaces == 0"
           (click)="nbrPlaceDecr(event)">
           Buy ticket
         </button>
 
-        <button 
-    class="btn btn-sm btn-outline-danger"
-    (click)="deleteEvent(event)">
-    Delete
-  </button>
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="deleteEvent(event)">
+          Delete
+        </button>
       </div>
 
       <!-- Date + lien -->
       <div class="d-flex justify-content-between align-items-center">
         <span>{{ event.date | dateTransfer }}</span>
 
-        <a [routerLink]="['./detail', event.id]" 
+        <a [routerLink]="['./detail', event.id]"
            class="btn btn-success btn-sm">
           More details
         </a>
@@ -69,3 +69,4 @@
     </div>
   </div>
 </div>
+
