@@ -1,8 +1,8 @@
-export class Feedback{
-    id?:number;
-    userId:number;
-    eventId:number;
-    content:String;
-    rate:number;
-    dateFeedback:Date;
+export class Feedback {
+  id?: string;  
+  userId: number;
+  eventId: number;
+  content: string;
+  rate: number;
+  dateFeedback: Date;
 }

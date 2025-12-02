@@ -7,11 +7,9 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './layout/home/home.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
-import {ListEventComponent} from './features/events/list-event/list-event.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {CardComponent} from './layout/card/card.component';
-
+import {SharedModule} from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,8 +22,8 @@ import {CardComponent} from './layout/card/card.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    CardComponent,
+    SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

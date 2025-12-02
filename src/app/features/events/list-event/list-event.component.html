@@ -1,22 +1,50 @@
-<div class="container py-4">
- <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="mb-0">List Events</h2>
-   <a routerLink="./newEvent">
-      <button class="btn btn-lg btn-warning">
-        Add Event
-      </button>
-   </a>
- </div>
-  <!-- Recherche -->
-  <input type="text" [(ngModel)]="searchValue"  class="form-control mb-4" placeholder="Rechercher un événement">
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0 fw-bold">Liste des événements</h2>
+  </div>
 
-  <div class="row g-3" >
+  <!-- RETIREZ CETTE SECTION DE RECHERCHE -->
+  <!-- La recherche se fait maintenant via la sidebar -->
 
-    <app-card class="col-md-4"
-                    *ngFor="let event of listEvents"
-                    [e]="event" >
+  <div class="row g-4">
+    <!-- Carte d'ajout d'événement -->
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div
+        class="card h-100 border-2 border-primary border-dashed text-center shadow-sm hover-shadow"
+        style="cursor: pointer; min-height: 250px;"
+        routerLink="form"
+      >
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+          <div class="mb-3">
+            <i class="bi bi-plus-circle text-primary" style="font-size: 4rem;"></i>
+          </div>
+          <h5 class="card-title text-primary fw-semibold">Ajouter un événement</h5>
+          <p class="card-text text-muted small">Cliquez pour créer un nouvel événement</p>
+        </div>
+      </div>
+    </div>
 
-    </app-card>
-
+    <!-- Cartes d'événements FILTRÉES -->
+    <app-card-event
+      *ngFor="let e of filteredList"
+      [event]="e"
+      class="col-lg-3 col-md-4 col-sm-6"
+      (eventNotifParent)="likeEvent($event)"
+      (eventDelete)="onDelete($event)">
+    </app-card-event>
   </div>
 </div>
+
+<style>
+/* Effet hover pour la carte d'ajout */
+.hover-shadow:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+/* Style pour bordure pointillée */
+.border-dashed {
+  border-style: dashed !important;
+}
+</style>

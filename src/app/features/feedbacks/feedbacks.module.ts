@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { FeedbacksRoutingModule } from './feedbacks-routing.module';
 import { FeedbacksComponent } from './feedbacks.component';
-import { FormComponent } from './form/form.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
+import { FormComponent } from './form/form.component';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FeedbacksRoutingModule,
     FormsModule,
-    FeedbacksRoutingModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class FeedbacksModule { }

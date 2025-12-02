@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../../models/user';
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../../models/user';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,33 +8,44 @@ import {User} from '../../../models/user';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  gForm: FormGroup;
-  constructor() {
-    }
-    ngOnInit() {
-    this.gForm = new FormGroup({
-      firstName: new FormControl('',
-                    [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl('',
-                    [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('',
-        [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/),Validators.minLength(8)]),
-      address: new FormGroup({
-        street: new FormControl('',[Validators.required, Validators.minLength(3)]),
-        city: new FormControl('',[Validators.required, Validators.minLength(3)]),
-        state: new FormControl('',[Validators.required, Validators.minLength(3)]),
-        zip: new FormControl('',[Validators.required, Validators.minLength(4)]),
-      })
-    })
-    }
-  //1- pattern for the password a..zA..Z@&0..9 (8 charact)
-  //2-add the address ()
-  //3-phones[]
+  user: User;
+  formRegister: FormGroup;
 
-    save(){
-    let user=this.gForm.getRawValue();
-    //user push service => backend
-      console.log(user)
-    }
+  constructor() {}
+
+  ngOnInit() {
+    this.user = new User();
+    this.formRegister = new FormGroup({
+      firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')
+      ]),
+      address: new FormGroup({
+        street: new FormControl(''),
+        city: new FormControl(''),
+        state: new FormControl(''),
+        zip: new FormControl('')
+      }),
+      phones: new FormArray([new FormControl('')])
+    });
+  }
+
+  get phones(): FormArray {
+    return this.formRegister.get('phones') as FormArray;
+  }
+
+  addPhone() {
+    this.phones.push(new FormControl(''));
+  }
+
+  save() {
+    this.user = this.formRegister.getRawValue();
+    console.log(this.user);
+  }
 }

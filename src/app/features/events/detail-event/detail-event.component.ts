@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {EventsService} from '../../../shared/data/events.service';
-import {Eventy} from '../../../models/eventy';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DataEventsService } from '../../../shared/services/data-events.service';
+import { Eventy } from '../../../models/eventy';
+import { FeedbackService } from '../../../shared/services/feedback.service';
 
 @Component({
   selector: 'app-detail-event',
@@ -9,15 +10,29 @@ import {Eventy} from '../../../models/eventy';
   styleUrl: './detail-event.component.css'
 })
 export class DetailEventComponent implements OnInit {
-   currentEvent:Eventy;
-  constructor(private route: ActivatedRoute,
-              private eventService:EventsService) {
-  }
+
+  currentEvent: Eventy;
+
+  defaultUserId: number = 1;
+
+  constructor(
+    private route: ActivatedRoute,
+    private eventService: DataEventsService,
+    private feedbackService: FeedbackService
+
+  ) {}
+
   ngOnInit() {
-   let id= this.route.snapshot.params['id'];
-   this.eventService.getEventById(id).subscribe(
-     (data:Eventy)=>this.currentEvent=data,
-   );
+    const id = this.route.snapshot.params['id'];
+    
+    this.eventService.getEventById(id).subscribe(
+      (data: Eventy) => {
+        this.currentEvent = data;
+      },
+      (error) => {
+        console.error("Erreur lors du chargement de l'événement :", error);
+      }
+    );
   }
 
 }
