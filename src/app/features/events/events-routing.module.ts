@@ -12,7 +12,8 @@ const routes: Routes = [
     children: [
       { path: '', component: ListEventComponent },
       { path: 'detail/:id', component: DetailEventComponent },
-      { path: 'form', component: FormEventComponent },
+      { path: 'form', component: FormEventComponent  },
+
     ],
   },
 ];
