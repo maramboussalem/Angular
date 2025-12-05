@@ -7,10 +7,9 @@ import {SharedModule} from '../../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import { DetailEventComponent } from './detail-event/detail-event.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
-
+import { CardComponent } from '../../layout/card/card.component';
 import { FormEventComponent } from './form-event/form-event.component';
 import { FeedbacksModule } from '../feedbacks/feedbacks.module';
-import {CardComponent} from '../../layout/card/card.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +24,8 @@ import {CardComponent} from '../../layout/card/card.component';
     EventsRoutingModule,
     SharedModule,
     FormsModule,
-    FeedbacksModule,
-    CardComponent
+    CardComponent,   
+    FeedbacksModule
   ],
  // providers:[DataEventsService]
 })
