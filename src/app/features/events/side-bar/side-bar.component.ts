@@ -5,7 +5,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })
-
 export class SideBarComponent {
   searchText: string = '';
   selectedLocation: string = '';

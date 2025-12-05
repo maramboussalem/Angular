@@ -10,22 +10,22 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CardComponent } from './layout/card/card.component';
+import {CardComponent} from './layout/card/card.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     SharedModule,
-    CardComponent,
-    HttpClientModule
+    HttpClientModule,
+    CardComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
