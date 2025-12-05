@@ -5,6 +5,7 @@ import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketsComponent } from './tickets.component';
 import {ListTicketComponent} from './list-ticket/list-ticket.component';
 import {FormsModule} from '@angular/forms';
+
 @NgModule({
   declarations: [
     TicketsComponent,

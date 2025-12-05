@@ -8,7 +8,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormComponent } from './form/form.component';
 import {CardComponent} from "../../layout/card/card.component";
 
-
 @NgModule({
   declarations: [
     FeedbacksComponent,
@@ -23,4 +22,5 @@ import {CardComponent} from "../../layout/card/card.component";
         CardComponent
     ]
 })
+
 export class FeedbacksModule { }

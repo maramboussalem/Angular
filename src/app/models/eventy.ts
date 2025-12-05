@@ -1,4 +1,5 @@
 export class Eventy {
+
   id: number;
   title: string;
   description: string;
@@ -9,4 +10,5 @@ export class Eventy {
   imageUrl: string;
   nbrPlaces: number;
   nbrLikes: number;
+  
 }

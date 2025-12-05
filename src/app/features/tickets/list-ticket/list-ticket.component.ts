@@ -10,9 +10,9 @@ export class ListTicketComponent implements OnInit {
   title:string;
   tickets: Array<Ticket> ;
   search:number;
-  constructor() {
-    //this.title = 'Hello World';
-  }
+  
+  constructor() { }
+
   ngOnInit() {
     this.title="hello world"
     this.tickets=[
@@ -23,12 +23,8 @@ export class ListTicketComponent implements OnInit {
         userId : 9,
         date : new Date(),
         valid : true,
-
         description: "test"
-
-      },
-
-      {
+      },{
         id : 7,
         price : 2300,
         eventId : 6,
@@ -36,11 +32,9 @@ export class ListTicketComponent implements OnInit {
         date : new Date(),
         valid : false,
       }
-
     ]
-
-
   }
+ 
   validateTicket(ticket: Ticket) {
     ticket.valid =false;
   }

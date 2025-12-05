@@ -6,15 +6,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class FeedbackService {
 
   private urlBackend = 'http://localhost:3000/feedbacks';
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  private httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   constructor(private http: HttpClient) {}
 

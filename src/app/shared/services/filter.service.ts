@@ -6,8 +6,8 @@ export interface EventFilters {
   selectedLocation: string;
   minPrice: number | null;
   maxPrice: number | null;
-  dateFilter: string; // 'all', 'upcoming', 'thisWeek', 'thisMonth'
-  availabilityFilter: string; // 'all', 'available', 'full'
+  dateFilter: string; 
+  availabilityFilter: string; 
   organizerId: number | null;
 }
 

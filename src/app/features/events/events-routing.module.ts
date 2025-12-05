@@ -5,6 +5,7 @@ import { ListEventComponent } from './list-event/list-event.component';
 import { DetailEventComponent } from './detail-event/detail-event.component';
 import { FormEventComponent } from './form-event/form-event.component';
 
+
 const routes: Routes = [
   {
     path: '',

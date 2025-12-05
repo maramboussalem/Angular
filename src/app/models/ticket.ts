@@ -1,4 +1,5 @@
 export class Ticket {
+
   id : number;
   price : number;
   eventId : number;
@@ -6,4 +7,5 @@ export class Ticket {
   date : Date;
   valid : boolean;
   description? : string;
+  
 }

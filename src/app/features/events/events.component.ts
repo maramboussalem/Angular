@@ -6,6 +6,7 @@ import { FilterService } from '../../shared/services/filter.service';
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
+
 export class EventsComponent {
   
   constructor(private filterService: FilterService) {}

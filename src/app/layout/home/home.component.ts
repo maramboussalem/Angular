@@ -7,6 +7,7 @@ import {Eventy} from '../../models/eventy';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent implements OnInit {
   list: Eventy[]
   constructor(private service: DataEventsService) {

@@ -10,4 +10,5 @@ const routes: Routes = [{ path: '', component: UsersComponent,
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class UsersRoutingModule { }

@@ -8,4 +8,5 @@ const routes: Routes = [{ path: '', component: TicketsComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class TicketsRoutingModule { }

@@ -5,7 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './feedbacks.component.html',
   styleUrl: './feedbacks.component.css'
 })
-export class FeedbacksComponent {
 
-  
-}
+export class FeedbacksComponent {}
