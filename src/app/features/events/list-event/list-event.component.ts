@@ -87,30 +87,21 @@ organizerId: number | null = null;
   });
 }
 
-likeEvent(event: Eventy) {
-  this.dataService.likeEvent(event.id).subscribe({
-    next: (updatedEvent) => {
-      event.nbrLikes = updatedEvent.nbrLikes; 
-    }
-  });
-}
 
-buyTicket(event: Eventy) {
-  this.dataService.buyTicket(event)?.subscribe({
-    next: (updatedEvent) => {
-      event.nbrPlaces = updatedEvent.nbrPlaces;
-    },
-    error: (err) => console.error('Erreur mise à jour ticket:', err)
+  likeEvent(event: Eventy) {
+  event.nbrLikes++;
+  this.dataService.updateEvent(event.id, event).subscribe(() => {
   });
-}
+  }
+
 
 onDelete(eventToDelete: Eventy) {
   if (confirm(`Voulez-vous vraiment supprimer l'événement "${eventToDelete.title}" ?`)) {
     this.dataService.deleteEvent(eventToDelete.id).subscribe(() => {
+      // Supprime l'événement de la liste locale
       this.list = this.list.filter(e => e.id !== eventToDelete.id);
     });
   }
 }
-
 
 }

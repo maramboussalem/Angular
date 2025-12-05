@@ -1,78 +1,76 @@
-<div class="container py-5">
+<div class="container mt-4">
+  <h2 class="mb-3 text-primary">Gestion des Feedbacks</h2>
 
-  <!-- Titre -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0 fw-bold text-dark">Gestion des Feedbacks</h2>
+  <!-- FORMULAIRE AJOUT -->
+  <div class="card p-3 mb-4 shadow-sm">
+    <h4>Ajouter un Feedback</h4>
+    <form (ngSubmit)="addFeedback()">
+      <div class="mb-3">
+        <label class="form-label">Contenu</label>
+        <textarea class="form-control"
+                  [(ngModel)]="newFeedback.content"
+                  name="content"
+                  required></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Note (1 - 5)</label>
+        <input type="number"
+               class="form-control"
+               [(ngModel)]="newFeedback.rate"
+               name="rate"
+               min="1"
+               max="5"
+               required>
+      </div>
+      <button class="btn btn-primary w-100" type="submit">Ajouter Feedback</button>
+    </form>
   </div>
 
-  <div class="row g-4">
+  <!-- LISTE DES FEEDBACKS -->
+  <div class="card p-3 shadow-sm">
+    <h4>Liste des Feedbacks</h4>
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Contenu</th>
+          <th>Note</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fb of feedbacks">
 
-    <!-- Carte d'ajout de Feedback -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100 border-2 border-primary border-dashed text-center shadow-sm hover-shadow p-3">
-        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-          <div class="mb-3">
-            <i class="bi bi-plus-circle text-primary" style="font-size: 3rem;"></i>
-          </div>
-          <h5 class="card-title text-primary fw-semibold mb-3">Ajouter un Feedback</h5>
-          <form class="w-100 px-2" (ngSubmit)="addFeedback()">
-            <div class="mb-2">
-              <textarea class="form-control"
-                        [(ngModel)]="newFeedback.content"
-                        name="content"
-                        rows="3"
-                        placeholder="Écrivez votre feedback..."
-                        required></textarea>
-            </div>
-            <div class="mb-2">
-              <input type="number"
-                     class="form-control"
-                     [(ngModel)]="newFeedback.rate"
-                     name="rate"
-                     min="1"
-                     max="5"
-                     placeholder="Note (1-5)"
-                     required>
-            </div>
-            <button class="btn btn-primary w-100 mt-2" type="submit">Ajouter</button>
-          </form>
-        </div>
-      </div>
-    </div>
+          <!-- MODE ÉDITION -->
+          <ng-container *ngIf="editFeedbackId === fb.id; else viewMode">
+            <td><input class="form-control" [(ngModel)]="editFeedbackData.content" name="editContent"></td>
+            <td><input type="number" min="1" max="5" class="form-control" [(ngModel)]="editFeedbackData.rate" name="editRate"></td>
+            <td>{{ fb.dateFeedback | date:'short' }}</td>
+            <td>
+              <button class="btn btn-success btn-sm me-2" (click)="saveEdit()">Save</button>
+              <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+            </td>
+          </ng-container>
 
-    <!-- Cards des feedbacks existants -->
-    <div *ngFor="let fb of feedbacks" class="col-lg-3 col-md-4 col-sm-6">
-      <div class="card h-100 shadow-sm p-3 hover-shadow">
+          <!-- MODE LECTURE -->
+          <ng-template #viewMode>
+            <td>{{ fb.content }}</td>
+            <td>{{ fb.rate }}</td>
+            <td>{{ fb.dateFeedback | date:'short' }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2" (click)="startEdit(fb)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteFeedback(fb.id)">Delete</button>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <app-card class="col-md-4" *ngFor="let object of listEvents" [event]="object" >
 
-        <!-- MODE ÉDITION -->
-        <ng-container *ngIf="editFeedbackId === fb.id; else viewMode">
-          <div class="mb-2">
-            <textarea class="form-control" [(ngModel)]="editFeedbackData.content" name="editContent" rows="3"></textarea>
-          </div>
-          <div class="mb-2">
-            <input type="number" min="1" max="5" class="form-control" [(ngModel)]="editFeedbackData.rate" name="editRate">
-          </div>
-          <div class="d-flex justify-content-between mt-2">
-            <button class="btn btn-success btn-sm" (click)="saveEdit()">Save</button>
-            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
-          </div>
-        </ng-container>
-
-        <!-- MODE LECTURE -->
-        <ng-template #viewMode>
-          <p>{{ fb.content }}</p>
-          <div class="d-flex justify-content-between align-items-center mt-auto">
-            <span class="badge bg-primary">{{ fb.rate }}/5</span>
-            <small class="text-muted">{{ fb.dateFeedback | date:'short' }}</small>
-          </div>
-          <div class="mt-2 d-flex justify-content-between">
-            <button class="btn btn-warning btn-sm" (click)="startEdit(fb)">Edit</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteFeedback(fb.id)">Delete</button>
-          </div>
-        </ng-template>
-
-      </div>
-    </div>
-
+    </app-card>
   </div>
 </div>
