@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../shared/services/user/user.service';
+import { User } from '../../../models/user';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-
+  user: User;
   formRegister: FormGroup;
 
-  constructor(private userService: UserService) {}
+  constructor() {}
 
   ngOnInit() {
+    this.user = new User();
     this.formRegister = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [
         Validators.required,
-Validators.pattern(
-  '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\\-={}\\[\\]|:;"\'<>,.?/~`]).{8,}$'
-)
+        Validators.pattern('^[a-z]+@[a-z]+\\.[a-z]{2,3}$')
       ]),
       password: new FormControl('', [
         Validators.required,
@@ -46,26 +45,7 @@ Validators.pattern(
   }
 
   save() {
-    const formValue = this.formRegister.getRawValue();
-
-    const userToSave = {
-      firstName: formValue.firstName,
-      lastName: formValue.lastName,
-      email: formValue.email,
-      password: formValue.password,
-      address: formValue.address,
-      phones: formValue.phones,
-      role: 'ROLE_USER'
-    };
-
-    this.userService.createUser(userToSave).subscribe({
-      next: (res) => {
-        console.log('Utilisateur enregistré avec succès', res);
-        this.formRegister.reset();
-      },
-      error: (err) => {
-        console.error('Erreur lors de l\'enregistrement', err);
-      }
-    });
+    this.user = this.formRegister.getRawValue();
+    console.log(this.user);
   }
 }

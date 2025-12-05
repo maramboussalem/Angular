@@ -21,23 +21,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/tickets" hrefActive="active">Mes Tickets</a>
         </li>
-
-        <ul class="navbar-nav ms-auto">
-  <li class="nav-item" *ngIf="!isLoggedIn">
-    <a class="nav-link" routerLink="/users/login" hrefActive="active">Se connecter</a>
-  </li>
-  <li class="nav-item dropdown" *ngIf="isLoggedIn">
-    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-      {{ firstName }} {{ lastName }}
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end">
-      <li><a class="dropdown-item" routerLink="/users/profile">Profil</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" (click)="logout()">Déconnexion</a></li>
-    </ul>
-  </li>
-</ul>
-
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/feedbacks" hrefActive="active">Feedback</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/auth/login" hrefActive="active">Se connecter</a>
+        </li>
 
       </ul>
     </div>

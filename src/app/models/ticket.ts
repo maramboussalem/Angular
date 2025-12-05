@@ -5,14 +5,5 @@ export class Ticket {
   userId : number;
   date : Date;
   valid : boolean;
-
-  description? : string;//description? optional
-
-
-
-
-
-
-
-
+  description? : string;
 }

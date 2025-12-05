@@ -7,7 +7,10 @@
         <div class="row g-3 mb-3">
           <div class="col-md-6">
             <label for="title" class="form-label fw-semibold">Titre de l'événement</label>
-            <input type="text" class="form-control" name="title"
+            <input
+              type="text"
+              class="form-control"
+              name="title"
               [(ngModel)]="event.title"
               required
               minlength="3"

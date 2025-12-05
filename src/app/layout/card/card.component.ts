@@ -1,22 +1,26 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Eventy } from '../../models/eventy';
-import { SharedModule } from '../../shared/shared.module';
-import { RouterModule } from '@angular/router';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {CommonModule, NgIf} from '@angular/common';
+import {SharedModule} from '../../shared/shared.module';
+import {Eventy} from '../../models/eventy';
+import {RouterModule} from '@angular/router';
 
 @Component({
-  selector: 'app-card-event',
+  selector: 'app-card',
   standalone: true,
-  imports: [CommonModule,SharedModule,RouterModule],
+  imports: [
+   CommonModule,
+    SharedModule,
+    RouterModule
+  ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  @Input() event: Eventy; // <-- remplacer Event par Eventy
+  //data ???
+  @Input() event: Eventy;
   @Input() searchValue: string;
 
-  @Output() eventNotifParent: EventEmitter<Eventy> = new EventEmitter();
-  @Output() eventBuyTicket: EventEmitter<Eventy> = new EventEmitter();
+  @Output() eventNotifParent:EventEmitter<Eventy>  = new EventEmitter();
   @Output() eventDelete: EventEmitter<Eventy> = new EventEmitter();
 
   notifParent(e: Eventy) {
@@ -24,10 +28,12 @@ export class CardComponent {
   }
 
   nbrPlaceDecr(e: Eventy) {
-    this.eventBuyTicket.emit(e);
+    if (e.nbrPlaces > 0) {
+      e.nbrPlaces--;
+    }
   }
 
   deleteEvent(e: Eventy) {
-    this.eventDelete.emit(e);
+    this.eventDelete.emit(e); // émet l'événement vers le parent
   }
 }

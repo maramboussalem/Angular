@@ -25,15 +25,13 @@
     </div>
 
     <!-- Cartes d'événements FILTRÉES -->
-     <app-card-event
-  *ngFor="let e of filteredList"
-  [event]="e"
-  class="col-lg-3 col-md-4 col-sm-6"
-  (eventNotifParent)="likeEvent($event)"
-  (eventBuyTicket)="buyTicket($event)"
-  (eventDelete)="onDelete($event)">
-</app-card-event>
-
+    <app-card
+      *ngFor="let e of filteredList"
+      [event]="e"
+      class="col-lg-3 col-md-4 col-sm-6"
+      (eventNotifParent)="likeEvent($event)"
+      (eventDelete)="onDelete($event)">
+    </app-card>
   </div>
 </div>
 
