@@ -1,25 +1,40 @@
-<h1>{{title}}</h1>
+<div class="container mt-5">
+  <h3 class="text-center mb-4">Mes Tickets</h3>
 
-<input name="search" placeholder="search by id"
-       type="text" class="form-control"
-       [(ngModel)]="search">
+  <table class="table table-bordered table-hover" *ngIf="tickets.length > 0; else noTickets">
+    <thead class="table-dark">
+      <tr>
+        <th>Événement</th>
+        <th>Prix</th>
+        <th>Date</th>
+        <th>Valide</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets">
+        <td>{{ getEventTitle(ticket.eventId) }}</td>
+        <td>{{ ticket.price | currency:'EUR' }}</td>
+        <td>{{ ticket.date | date:'short' }}</td>
+        <td>
+          <span class="badge" [ngClass]="ticket.valid ? 'bg-success' : 'bg-danger'">
+            {{ ticket.valid ? 'Oui' : 'Non' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="toggleValid(ticket)">
+            {{ ticket.valid ? 'Annuler validation' : 'Valider' }}
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteTicket(ticket)">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<table class="table">
-  <tr><th>id</th><th>price</th><th>available</th></tr>
-  <tr *ngFor = "let t of tickets" [hidden]="!(t.id==search) && search" >
-    <td>
-      {{t.id}}
-    </td>
-    <td>
-      {{t.price}}
-    </td>
-    <td>{{t.valid}}</td>
-    <td>
-      <button class="btn btn-sm btn-primary"
-              [disabled]="!t.valid"
-              (click)="validateTicket(t)">
-      validate
-      </button>
-    </td>
-  </tr>
-</table>
+  <ng-template #noTickets>
+    <p class="text-center">Vous n'avez aucun ticket.</p>
+  </ng-template>
+  
+</div>

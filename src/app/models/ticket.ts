@@ -1,9 +1,9 @@
 export class Ticket {
 
-  id : number;
+  id?: number;
   price : number;
-  eventId : number;
-  userId : number;
+  eventId : string;
+  userId : string;
   date : Date;
   valid : boolean;
   description? : string;

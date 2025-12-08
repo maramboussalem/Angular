@@ -4,6 +4,7 @@ import { FeedbackService } from '../../../shared/services/feedback.service';
 import { Feedback } from '../../../models/feedback';
 import {Eventy} from '../../../models/eventy';
 import {DataEventsService} from '../../../shared/services/data-events.service';
+import { AuthService } from '../../../shared/services/user/auth.service';
 
 @Component({
   selector: 'app-form',
@@ -29,7 +30,8 @@ export class FormComponent {
   constructor(
     private feedbackService: FeedbackService,
     private route: ActivatedRoute,
-    private serviceEvent: DataEventsService
+    private serviceEvent: DataEventsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -65,16 +67,26 @@ export class FormComponent {
   }
 
   addFeedback(): void {
-    this.newFeedback.dateFeedback = new Date();
+  this.newFeedback.dateFeedback = new Date();
 
-    this.feedbackService.addFeedback(this.newFeedback)
-      .subscribe(() => {
-        this.loadFeedbacks();
-        // reset champs
-        this.newFeedback.content = '';
-        this.newFeedback.rate = 0;
-      });
+  // Récupérer l'utilisateur connecté avant d'ajouter le feedback
+  const currentUser = this.authService.getCurrentUser();
+  if (currentUser) {
+    this.newFeedback.userId = currentUser.id;   // <-- ID réel de l'utilisateur connecté
+  } else {
+    alert('Vous devez être connecté pour ajouter un feedback');
+    return; // empêcher l'ajout si pas connecté
   }
+
+  this.feedbackService.addFeedback(this.newFeedback)
+    .subscribe(() => {
+      this.loadFeedbacks();
+      // reset champs
+      this.newFeedback.content = '';
+      this.newFeedback.rate = 0;
+    });
+}
+
 
   // Fonction pour commencer l'édition
   startEdit(fb: Feedback): void {

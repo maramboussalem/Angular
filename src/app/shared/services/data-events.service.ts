@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class DataEventsService {
-  urlBackend = 'http://localhost:3000/events/';
+  urlBackend = 'http://localhost:3000/events';
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,7 @@ export class DataEventsService {
   }
 
   getEventById(id: any) {
-    return this.http.get<Eventy>(this.urlBackend + id);
+  return this.http.get<Eventy>(`${this.urlBackend}/${id}`); // http://localhost:3000/events/1
   }
 
   addEvent(e: Eventy) {
@@ -24,14 +24,14 @@ export class DataEventsService {
   }
 
   deleteEvent(id: number) {
-    return this.http.delete(this.urlBackend + id);
+  return this.http.delete(`${this.urlBackend}/${id}`); // DELETE http://localhost:3000/events/1
   }
 
   updateEvent(id: number, e: Eventy) {
-    return this.http.put<Eventy>(this.urlBackend + id, e);
+    return this.http.put<Eventy>(`${this.urlBackend}/${id}`, e);
   }
 
   getEventsByLocation(location: string) {
-    return this.http.get<Eventy[]>(this.urlBackend +'?location=' +location);
+    return this.http.get<Eventy[]>(`${this.urlBackend}?location=${location}`);
   }
 }

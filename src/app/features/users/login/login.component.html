@@ -1,0 +1,17 @@
+<div class="container mt-5">
+  <div class="card p-4 shadow w-50 mx-auto">
+    <h3 class="text-center mb-4">Connexion</h3>
+
+    <form [formGroup]="formLogin" (ngSubmit)="login()">
+
+      <label>Email</label>
+      <input type="email" formControlName="email" class="form-control mb-2">
+
+      <label>Mot de passe</label>
+      <input type="password" formControlName="password" class="form-control mb-3">
+
+      <button class="btn btn-primary w-100" type="submit">Se connecter</button>
+
+    </form>
+  </div>
+</div>
