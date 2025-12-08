@@ -3,7 +3,6 @@
 
     <a class="navbar-brand fw-bold" routerLink="/">EventHub</a>
 
-    <!-- Bouton burger (mobile) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
             aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -11,17 +10,36 @@
 
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav ms-auto">
+
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" hrefActive="active" aria-current="page">Accueil</a>
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" aria-current="page">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/events" hrefActive="active">Événements</a>
+          <a class="nav-link" routerLink="/events" routerLinkActive="active">Événements</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/tickets" hrefActive="active">Mes Tickets</a>
+        <li class="nav-item" *ngIf="currentUser">
+          <a class="nav-link" routerLink="/tickets/list-ticket" routerLinkActive="active">Mes Tickets</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/auth/login" hrefActive="active">Se connecter</a>
+
+        <!-- Si utilisateur non connecté -->
+        <li class="nav-item" *ngIf="!currentUser">
+          <a class="nav-link" routerLink="/users/login" routerLinkActive="active">Se connecter</a>
+        </li>
+
+        <!-- Si utilisateur connecté -->
+        <li class="nav-item dropdown" *ngIf="currentUser">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            {{ currentUser.firstName }} {{ currentUser.lastName }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" routerLink="/users/profile">Mon Profil</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item" (click)="logout()">Déconnexion</a>
+            </li>
+          </ul>
         </li>
 
       </ul>

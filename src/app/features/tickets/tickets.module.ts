@@ -14,7 +14,7 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     TicketsRoutingModule,
-    FormsModule //to use correctly the directive ngModel
+    FormsModule 
   ]
 })
 export class TicketsModule { }

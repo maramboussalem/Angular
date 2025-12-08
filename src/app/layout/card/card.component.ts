@@ -8,7 +8,7 @@ import {RouterModule} from '@angular/router';
   selector: 'app-card',
   standalone: true,
   imports: [
-   CommonModule,
+    CommonModule,
     SharedModule,
     RouterModule
   ],
@@ -16,24 +16,36 @@ import {RouterModule} from '@angular/router';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  //data ???
+ 
   @Input() event: Eventy;
   @Input() searchValue: string;
 
-  @Output() eventNotifParent:EventEmitter<Eventy>  = new EventEmitter();
+  @Output() eventNotifParent:EventEmitter<Eventy>  = new EventEmitter();   
   @Output() eventDelete: EventEmitter<Eventy> = new EventEmitter();
+  @Output() buyTicket: EventEmitter<Eventy> = new EventEmitter();
+  @Output() eventDislike: EventEmitter<Eventy> = new EventEmitter();
 
-  notifParent(e: Eventy) {
-    this.eventNotifParent.emit(e);
-  }
 
-  nbrPlaceDecr(e: Eventy) {
-    if (e.nbrPlaces > 0) {
-      e.nbrPlaces--;
+   notifParent(e: Eventy) {
+     this.eventNotifParent.emit(e);
+   }
+
+   nbrPlaceDecr(e: Eventy) {
+     if (e.nbrPlaces > 0) {
+       e.nbrPlaces--;
+       this.buyTicket.emit(e); // envoyer au parent
+     }
+   }
+
+   deleteEvent(e: Eventy) {
+     this.eventDelete.emit(e); // émet l'événement vers le parent
+   }
+
+  dislike(event: Eventy) {
+    if (event.nbrLikes > 0) {
+     event.nbrLikes--;
+     this.eventDislike.emit(event);
     }
   }
 
-  deleteEvent(e: Eventy) {
-    this.eventDelete.emit(e); // émet l'événement vers le parent
-  }
 }

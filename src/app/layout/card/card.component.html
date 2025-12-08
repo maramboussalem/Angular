@@ -1,17 +1,18 @@
-<div *ngIf="event.title === searchValue || searchValue == null">
+<div *ngIf="event && (event.title === searchValue || !searchValue)">
 
-  <div class="card h-100 shadow-sm" NgHover>
+  <div class="card h-100 shadow-sm">
 
     <!-- Image -->
-    <img src="{{ event.imageUrl }}" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+    <img [src]="event.imageUrl"
+         class="card-img-top img-fluid"
+         style="height: 200px; object-fit: cover;">
 
-    <!-- Contenu -->
-    <div class="card-body">
+    <div class="card-body d-flex flex-column">
 
       <!-- Titre + disponibilité -->
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <h5 class="card-title"
-            [ngStyle]="{'color': event.nbrPlaces === 0 ? 'red' : 'green'}">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="card-title mb-0"
+            [ngStyle]="{ color: event.nbrPlaces === 0 ? 'red' : 'green' }">
           {{ event.title }}
         </h5>
 
@@ -21,19 +22,20 @@
       </div>
 
       <!-- Prix + localisation -->
-      <p class="text-muted mb-1">
+      <p class="text-muted mb-2">
         {{ event.price | euro }} | {{ event.location }}
       </p>
 
       <!-- Description -->
-      <p class="mb-2">{{ event.description }}</p>
+      <p class="mb-3">{{ event.description }}</p>
 
+      <!-- Boutons (alignement parfait) -->
+      <div class="d-flex flex-wrap gap-2 mb-3">
 
-      <!-- Boutons -->
-      <div class="d-flex gap-2 mb-2">
+        <!-- Like -->
         <button
+          class="btn flex-grow-1"
           [ngClass]="{
-            'btn': true,
             'btn-danger': event.nbrLikes >= 5,
             'btn-warning': event.nbrLikes < 5
           }"
@@ -41,22 +43,33 @@
           👍 Like {{ event.nbrLikes }}
         </button>
 
+        <!-- Dislike -->
         <button
-          class="btn btn-sm btn-primary"
-          [disabled]="event.nbrPlaces == 0"
-          (click)="nbrPlaceDecr(event)">
-          Buy ticket
+          class="btn btn-secondary flex-grow-1"
+          [disabled]="event.nbrLikes === 0"
+          (click)="dislike(event)">
+          👎 Dislike
         </button>
 
+        <!-- Buy -->
         <button
-          class="btn btn-sm btn-outline-danger"
-          (click)="deleteEvent(event)">
-          Delete
+          class="btn btn-primary flex-grow-1"
+          [disabled]="event.nbrPlaces === 0"
+          (click)="nbrPlaceDecr(event)">
+           BuyTicket
         </button>
+
+        <!-- Delete -->
+        <button
+          class="btn btn-outline-danger flex-grow-1"
+          (click)="deleteEvent(event)">
+           Delete
+        </button>
+
       </div>
 
-      <!-- Date + lien -->
-      <div class="d-flex justify-content-between align-items-center">
+      <!-- Date + Details -->
+      <div class="d-flex justify-content-between align-items-center mt-auto">
         <span>{{ event.date | dateTransfer }}</span>
 
         <a [routerLink]="['./detail', event.id]"
@@ -65,8 +78,6 @@
         </a>
       </div>
 
-
     </div>
   </div>
 </div>
-
